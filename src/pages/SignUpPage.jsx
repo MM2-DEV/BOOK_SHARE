@@ -1,6 +1,6 @@
 import React from "react";
 
-const SignUp = () => {
+const SignUpPage = () => {
   return (
     <div className="mt-8">
       <div className="w-[40%] shadow-xl p-4 rounded-md mx-auto bg-[#9FE2BF] ">
@@ -62,4 +62,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignUpPage;

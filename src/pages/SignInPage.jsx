@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const SignIn = () => {
+const SignInPage = () => {
 
   const [user, setUser] = useState({
     name: "",
@@ -69,4 +69,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignInPage;
