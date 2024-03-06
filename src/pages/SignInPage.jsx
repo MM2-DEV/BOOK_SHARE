@@ -1,61 +1,55 @@
-import React, { useState } from "react";
+import React from "react";
+import { useForm } from "react-hook-form";
 
 const SignInPage = () => {
 
-  const [user, setUser] = useState({
-    name: "",
-    password: "",
+  const {register, handleSubmit} = useForm({
+    defaultValues:{
+      name: "",
+      password: "",
+    }
   });
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    setUser(()=>{
-      return{
-        
-      }
-    })
+ 
+  const inputChangeHandler = (data) => {
+    console.log("inputChangeHandler:");
   };
 
-  const inputChangeHandler = () => {
-    setUser((prev) => {
-      return {
-        ...prev,
-        [e.target.name]: e.target.value,
-      };
-    });
+  const submitHandler = (data) => {
+    console.log("Submit Handler:", data);
   };
 
   return (
     <div className="mt-8">
       <div className="w-[40%] shadow-xl p-4 rounded-md mx-auto bg-gray-400 ">
         <h1 className="text-2xl font-bold text-center">Sign in</h1>
-        <form onSubmit={submitHandler}>
+        <form onSubmit={handleSubmit(submitHandler)}>
           <div className="flex flex-col">
             <label>Username</label>
             <input
               type="text"
               name="name"
+              {...register("name")}
               className="p-2 border rounded-md border-gray-400"
               placeholder="Enter Username"
-              value={user.name}
               onChange={inputChangeHandler}
             />
           </div>
           <div className="flex flex-col mt-2">
             <label>Password</label>
             <input
-              type="text"
+              type="password"
               name="pwd"
+              {...register("password")}
               className="p-2 border rounded-md border-gray-400"
               placeholder="Enter Password"
-              value={user.pwd}
               onChange={inputChangeHandler}
             />
           </div>
           <div className="mt-4 text-center">
             <button
               type="submit"
-              className="w-[80px] text-white p-2 border rounded-md bg-[#154a54]"
+              className="w-[80px] text-white p-2 border rounded-md bg-[#154a54] hover:bg-[#4b8c99]"
             >
               Submit
             </button>
