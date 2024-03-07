@@ -9,7 +9,7 @@ const BookList = () => {
       </div>
 
       <div className="mt-5 bg-slate-100 p-3 rounded-lg">
-        <h2 >book list table will be show here</h2>
+        <h2 >Book list table will be shown here</h2>
       </div>
     </div>
   );
