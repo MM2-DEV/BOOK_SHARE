@@ -17,6 +17,8 @@ import DonorList from "./pages/dashboard/donors/DonorList";
 import CreateDonor from "./pages/dashboard/donors/CreateDonor";
 import GenreList from "./pages/dashboard/genres/GenreList";
 import CreateGenre from "./pages/dashboard/genres/CreateGenre";
+import RatingList from "./pages/dashboard/ratings/RatingList";
+import CreateRating from "./pages/dashboard/ratings/CreateRating";
 
 const routes1 = createBrowserRouter([
   {
@@ -112,6 +114,20 @@ const routes1 = createBrowserRouter([
           {
             path: "create",
             element: <CreateGenre/>,
+          },
+        ],
+      },
+
+      {
+        path: "ratings",
+        children: [
+          {
+            index: true,
+            element: <RatingList/>,
+          },
+          {
+            path: "create",
+            element: <CreateRating/>,
           },
         ],
       },
