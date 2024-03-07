@@ -15,6 +15,8 @@ import WriterList from "./pages/dashboard/writers/WriterList";
 import CreateWriter from "./pages/dashboard/writers/CreateWriter";
 import DonorList from "./pages/dashboard/donors/DonorList";
 import CreateDonor from "./pages/dashboard/donors/CreateDonor";
+import GenreList from "./pages/dashboard/genres/GenreList";
+import CreateGenre from "./pages/dashboard/genres/CreateGenre";
 
 const routes1 = createBrowserRouter([
   {
@@ -99,6 +101,21 @@ const routes1 = createBrowserRouter([
           },
         ],
       },
+
+      {
+        path: "genres",
+        children: [
+          {
+            index: true,
+            element: <GenreList/>,
+          },
+          {
+            path: "create",
+            element: <CreateGenre/>,
+          },
+        ],
+      },
+
     ],
   },
 ]);
