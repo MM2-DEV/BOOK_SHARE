@@ -168,6 +168,33 @@ const DashboardSidebar = () => {
           )}
         </Disclosure>
 
+        <Disclosure as="div" className="mt-2">
+          {({ open }) => (
+            <>
+              <Disclosure.Button className="flex w-full justify-between rounded-lg bg-purple-100 px-4 py-2 text-left text-sm font-medium text-purple-900 hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
+                <span>Readers Love</span>
+                <ChevronUpIcon
+                  className={`${
+                    open ? "rotate-180 transform" : ""
+                  } h-5 w-5 text-purple-500`}
+                />
+              </Disclosure.Button>
+
+              <Disclosure.Panel className="px-3 py-2 text-sm text-purple-900">
+                <ul >
+                  <li className="mb-2">
+                    <Link to={"/dashboard/readers"}>All Readers</Link>
+                  </li>
+
+                  <li className="mb-2">
+                    <Link to={"/dashboard/readers/create"}>Add Readers</Link>
+                  </li>
+                </ul>
+              </Disclosure.Panel>
+            </>
+          )}
+        </Disclosure>
+
       </div>
     </div>
   );

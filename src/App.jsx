@@ -21,6 +21,8 @@ import RatingList from "./pages/dashboard/ratings/RatingList";
 import CreateRating from "./pages/dashboard/ratings/CreateRating";
 import ReviewList from "./pages/dashboard/reviews/ReviewList";
 import CreateReview from "./pages/dashboard/reviews/CreateReview";
+import ReaderList from "./pages/dashboard/readers/ReaderList";
+import CreateReader from "./pages/dashboard/readers/CreateReader";
 
 const routes1 = createBrowserRouter([
   {
@@ -144,6 +146,20 @@ const routes1 = createBrowserRouter([
           {
             path: "create",
             element: <CreateReview/>,
+          },
+        ],
+      },
+
+      {
+        path: "readers",
+        children: [
+          {
+            index: true,
+            element: <ReaderList/>,
+          },
+          {
+            path: "create",
+            element: <CreateReader/>,
           },
         ],
       },
