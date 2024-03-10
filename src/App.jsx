@@ -119,6 +119,10 @@ const routes1 = createBrowserRouter([
             path: "create",
             element: <CreateGenre/>,
           },
+          {
+            path: "create/:id",
+            element: <CreateGenre/>,
+          },
         ],
       },
 
