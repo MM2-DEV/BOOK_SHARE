@@ -31,7 +31,7 @@ export const updateRating = createAsyncThunk(
   async (inputState) => {
     console.log("request body:", inputState);
 
-    const url = `https://book-share-json-server.onrender.com/ratings${id}}`;
+    const url = `https://book-share-json-server.onrender.com/ratings${id}`;
 
     const res = await axios.put(url, inputState);
 
@@ -40,7 +40,7 @@ export const updateRating = createAsyncThunk(
 );
 
 export const deleteRating = createAsyncThunk("ratings/deleteRating", async (id) => {
-  const url = `https://book-share-json-server.onrender.com/ratings${id}}`;
+  const url = `https://book-share-json-server.onrender.com/ratings${id}`;
 
   const res = await axios.delete(url);
 

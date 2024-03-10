@@ -1,10 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FaRegPaperPlane } from "react-icons/fa";
-
+import { useDispatch, useSelector } from "react-redux";
+import {
+  createGenre,
+  updateGenre,
+} from "../../../store/actions/genres/genresActionHandlers";
+import { useNavigate, useParams } from "react-router-dom";
+import useGenre from "../../../hooks/useGenre";
 
 const CreateGenre = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
+
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const genreState = useGenre();
+
+  const params = useParams();
+
+  const { isCreateSuccess, isSingleSuccess, singleData, isUpdateSuccess } = genreState;
+
+  console.log("isSingleSuccess", isSingleSuccess);
+  console.log("singleData", singleData);
 
   const inputChangeHandler = (data) => {
     console.log("inputChangeHandler:");
@@ -12,7 +31,40 @@ const CreateGenre = () => {
 
   const submitHandler = (data) => {
     console.log("submit handler :", data);
+
+    const requestBody = {
+      id: 11,
+      name: data.name,
+      description: data.description,
+      date: data.date,
+    };
+
+    if (params.id) {
+      dispatch(updateGenre({requestBody:requestBody,id:params.id}));
+    } else {
+      dispatch(createGenre(requestBody));
+    }
   };
+
+  useEffect(() => {
+    if (isCreateSuccess) {
+      navigate("/dashboard/genres");
+    }
+  }, [isCreateSuccess]);
+
+  useEffect(() => {
+    if (isUpdateSuccess) {
+      navigate("/dashboard/genres");
+    }
+  }, [isUpdateSuccess]);
+
+  useEffect(() => {
+    if (isSingleSuccess && singleData) {
+      setValue("name", singleData.name);
+      setValue("description", singleData.description);
+      setValue("date", singleData.date);
+    }
+  }, [isSingleSuccess, singleData]);
 
   return (
     <div className="w-full">
@@ -44,14 +96,30 @@ const CreateGenre = () => {
               <label className="basis-full md:basis-1/3 p-1 text-sm">
                 Description
               </label>
-             <div className="p-1 basis-full md:basis-3/3">
-             <textarea
-                cols="30"
-                rows="3"
-                className="w-full p-2 border rounded-md focus:border-green-900 focus:outline-none placeholder:text-sm"
-                placeholder="Enter Description"
-              ></textarea>
-             </div>
+              <div className="p-1 basis-full md:basis-3/3">
+                <textarea
+                  cols="30"
+                  rows="3"
+                  {...register("description")}
+                  className="w-full p-2 border rounded-md focus:border-green-900 focus:outline-none placeholder:text-sm"
+                  placeholder="Enter Description"
+                ></textarea>
+              </div>
+            </div>
+
+            <div className="flex flex-col md:flex-row">
+              <label className="basis-full md:basis-1/3 p-1 text-sm">
+                Date
+              </label>
+              <div className="p-1 basis-full md:basis-3/3">
+                <input
+                  type="date"
+                  name="date"
+                  {...register("date")}
+                  className="w-full p-2 border rounded-md focus:border-green-900 focus:outline-none placeholder:text-sm"
+                  onChange={inputChangeHandler}
+                />
+              </div>
             </div>
 
             <div className="w-full pt-2 px-1 text-right">
@@ -59,7 +127,7 @@ const CreateGenre = () => {
                 type="submit"
                 className="px-3 rounded-md py-1 border border-green-600 text-sm flex items-center justify-center ml-auto"
               >
-                Submit <FaRegPaperPlane size={15} className="ml-2"/>
+                Submit <FaRegPaperPlane size={15} className="ml-2" />
               </button>
             </div>
           </form>

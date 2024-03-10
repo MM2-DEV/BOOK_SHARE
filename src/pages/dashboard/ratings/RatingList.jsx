@@ -46,6 +46,7 @@ const RatingList = () => {
           <div className="w-full mt-[20px]">
             <table className="w-full border border-green-600 border-collapse">
               <thead>
+                <tr>
                 <th className="border border-green-600 px-[20px] py-[5px]">
                   Book Name English
                 </th>
@@ -61,6 +62,7 @@ const RatingList = () => {
                 <th className="border border-green-600 px-[20px] py-[5px]">
                   Action
                 </th>
+                </tr>
               </thead>
               <tbody>
                 {listData.map((item, index) => {

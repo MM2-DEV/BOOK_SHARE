@@ -2,17 +2,18 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getGenreList } from "../store/actions/genres/genresActionHandlers";
 
-
 const useGenreList = () => {
-  const genreList = useSelector((store) => store.genres);
+  const genreState = useSelector((store) => store.genres);
+
+  const { isDeleteSuccess } = genreState;
+
   const dispatch = useDispatch();
-  console.log("genreList:", genreList)
 
   useEffect(() => {
     dispatch(getGenreList());
-  }, []);
+  }, [isDeleteSuccess]);
 
-  return genreList;
+  return genreState;
 };
 
 export default useGenreList;
