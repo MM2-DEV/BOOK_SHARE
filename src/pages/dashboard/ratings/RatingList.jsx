@@ -3,16 +3,40 @@ import { FaRegEye } from "react-icons/fa";
 import { FaPen } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import useRatingList from "../../../hooks/useRatingList";
+import { FaPlus } from "react-icons/fa6";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { deleteRating } from "../../../store/actions/ratings/ratingsActionHandler";
 
 const RatingList = () => {
   const { isListLoading, listError, listData } = useRatingList();
   console.log("listdata:", listData);
 
+  const dispatch = useDispatch();
+
+  const deleteHandler = (id)=>{
+    console.log("id:", id)
+
+    dispatch(deleteRating(id))
+  }
+
   return (
     <div className="w-full">
-      <div className="bg-slate-100 p-3 rounded-lg">
-        <h2 className="text-xl">All Ratings</h2>
-        <p className="text-xs">All rating list of this virtual library</p>
+      <div className="bg-slate-100 p-3 rounded-lg flex items-center justify-between">
+        <div>
+          <h2 className="text-xl">All Ratings</h2>
+          <p className="text-xs">All rating list of this virtual library</p>
+        </div>
+        <div>
+         <Link to="/dashboard/ratings/create">
+         <button
+            type="button"
+            className=" bg-blue-500 hover:bg-blue-700 text-white flex items-center justify-center py-2 px-4 rounded-full"
+          >
+            <FaPlus color="#fff" className="mr-1" /> Add New
+          </button>
+         </Link>
+        </div>
       </div>
 
       <div className="mt-5 bg-slate-100 p-3 rounded-lg">
@@ -23,13 +47,16 @@ const RatingList = () => {
             <table className="w-full border border-green-600 border-collapse">
               <thead>
                 <th className="border border-green-600 px-[20px] py-[5px]">
-                  Book Name
+                  Book Name English
+                </th>
+                <th className="border border-green-600 px-[20px] py-[5px]">
+                  Book Name Bengali
+                </th>
+                <th className="border border-green-600 px-[20px] py-[5px]">
+                  User Name
                 </th>
                 <th className="border border-green-600 px-[20px] py-[5px]">
                   Rating Value
-                </th>
-                <th className="border border-green-600 px-[20px] py-[5px]">
-                  Date
                 </th>
                 <th className="border border-green-600 px-[20px] py-[5px]">
                   Action
@@ -40,23 +67,27 @@ const RatingList = () => {
                   return (
                     <tr>
                       <td className="border border-green-600 px-[20px] py-[5px]">
-                        Book Name
+                        {item.book?.nameEn}
+                      </td>
+                      <td className="border border-green-600 px-[20px] py-[5px]">
+                        {item.book?.nameBn}
+                      </td>
+                      <td className="border border-green-600 px-[20px] py-[5px]">
+                        {item?.user.name}
                       </td>
                       <td className="border border-green-600 px-[20px] py-[5px]">
                         {item.ratingValue}
                       </td>
-                      <td className="border border-green-600 px-[20px] py-[5px]">
-                        Date
-                      </td>
+                      
                       <td className="border border-green-600 px-[20px] py-[5px]">
                         <div className="w-full flex items-center justify-between">
                           <div>
-                            <FaRegEye size={25} color="#60a5fa"/>
+                            <FaRegEye size={25} color="#60a5fa" />
                           </div>
                           <div>
-                            <FaPen size={22} color="#eab308"/>
+                            <FaPen size={22} color="#eab308" />
                           </div>
-                          <div>
+                          <div onClick={()=>deleteHandler(item.id)}>
                             <MdDelete size={25} color="#f43f5e"/>
                           </div>
                         </div>
