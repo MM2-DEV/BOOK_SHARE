@@ -1,5 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { FaRegPaperPlane } from "react-icons/fa";
+
 
 const CreateGenre = () => {
   const { register, handleSubmit } = useForm();
@@ -42,20 +44,22 @@ const CreateGenre = () => {
               <label className="basis-full md:basis-1/3 p-1 text-sm">
                 Description
               </label>
-              <textarea
+             <div className="p-1 basis-full md:basis-3/3">
+             <textarea
                 cols="30"
                 rows="3"
                 className="w-full p-2 border rounded-md focus:border-green-900 focus:outline-none placeholder:text-sm"
                 placeholder="Enter Description"
               ></textarea>
+             </div>
             </div>
 
             <div className="w-full pt-2 px-1 text-right">
               <button
                 type="submit"
-                className="px-3 rounded-md py-1 border border-green-600 text-sm"
+                className="px-3 rounded-md py-1 border border-green-600 text-sm flex items-center justify-center ml-auto"
               >
-                Submit
+                Submit <FaRegPaperPlane size={15} className="ml-2"/>
               </button>
             </div>
           </form>

@@ -1,5 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { FaRegPaperPlane } from "react-icons/fa";
+
 
 const CreateBook = () => {
   const { register, handleSubmit } = useForm();
@@ -219,9 +221,9 @@ const CreateBook = () => {
             <div className="w-full pt-2 px-1 text-right">
               <button
                 type="submit"
-                className="px-3 rounded-md py-1 border border-green-600 text-sm"
+                className="px-3 rounded-md py-1 border border-green-600 text-sm flex items-center justify-center ml-auto"
               >
-                Submit
+                Submit <FaRegPaperPlane size={15} className="ml-2"/>
               </button>
             </div>
           </form>
