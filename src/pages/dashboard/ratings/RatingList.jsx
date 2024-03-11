@@ -4,13 +4,15 @@ import { FaPen } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import useRatingList from "../../../hooks/useRatingList";
 import { FaPlus } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deleteRating } from "../../../store/actions/ratings/ratingsActionHandler";
 
 const RatingList = () => {
   const { isListLoading, listError, listData } = useRatingList();
   console.log("listdata:", listData);
+
+  const navigate = useNavigate()
 
   const dispatch = useDispatch();
 
@@ -86,7 +88,9 @@ const RatingList = () => {
                           <div>
                             <FaRegEye size={25} color="#60a5fa" />
                           </div>
-                          <div>
+                          <div onClick={() =>
+                              navigate(`/dashboard/ratings/create/${item.id}`)
+                            }>
                             <FaPen size={22} color="#eab308" />
                           </div>
                           <div onClick={()=>deleteHandler(item.id)}>
