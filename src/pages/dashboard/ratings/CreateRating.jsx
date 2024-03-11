@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FaRegPaperPlane } from "react-icons/fa";
 import useBookList from "../../../hooks/useBookList";
 import { useDispatch } from "react-redux";
-import { createRating } from "../../../store/actions/ratings/ratingsActionHandler";
+import {
+  createRating,
+  updateRating,
+} from "../../../store/actions/ratings/ratingsActionHandler";
+import { useNavigate, useParams } from "react-router-dom";
+import useRating from "../../../hooks/useRating";
 
 const CreateRating = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
+
+  const navigate = useNavigate();
+
+  const ratingState = useRating();
+
+  const params = useParams();
+
+  const { isCreateSuccess, isSingleSuccess,  isUpdateSuccess, singleData } = ratingState;
 
   const { isListLoading, listError, listData } = useBookList();
 
@@ -27,8 +40,32 @@ const CreateRating = () => {
       date: data.date,
     };
 
-    dispatch(createRating(requestBody));
+    if (params.id) {
+      dispatch(updateRating({ requestBody: requestBody, id: params.id }));
+    } else {
+      dispatch(createRating(requestBody));
+    }
   };
+
+  useEffect(() => {
+    if (isCreateSuccess) {
+      navigate("/dashboard/ratings");
+    }
+  }, [isCreateSuccess]);
+
+  useEffect(()=>{
+    if(isUpdateSuccess){
+      navigate("/dashboard/ratings")
+    }
+  },[isUpdateSuccess])
+
+  useEffect(() => {
+    if (isSingleSuccess && singleData) {
+      setValue("book", singleData.book);
+      setValue("ratingValue", singleData.ratingValue);
+      setValue("date", singleData.date);
+    }
+  }, [isSingleSuccess, singleData]);
 
   return (
     <div className="w-full">

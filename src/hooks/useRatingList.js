@@ -3,15 +3,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { getRatingList } from "../store/actions/ratings/ratingsActionHandler";
 
 const useRatingList = () => {
-  const ratingList = useSelector((store) => store.ratings);
+
+  const ratingState = useSelector((store) => store.ratings);
+
   const dispatch = useDispatch();
-  console.log("ratingList:", ratingList)
+
+  console.log("ratingState:", ratingState)
+
+  const {isDeleteSuccess} = ratingState
 
   useEffect(() => {
-    dispatch(getRatingList());
-  }, []);
 
-  return ratingList;
+    dispatch(getRatingList());
+
+  }, [isDeleteSuccess]);
+
+  return ratingState;
 };
 
 export default useRatingList;
