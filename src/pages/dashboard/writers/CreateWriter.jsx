@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FaRegPaperPlane } from "react-icons/fa";
-
+import { useDispatch } from "react-redux";
+import {
+  createWriter,
+  updateWriter,
+} from "../../../store/actions/writers/writersActionHandlers";
+import { v4 as uuidv4 } from "uuid";
+import { useNavigate, useParams } from "react-router-dom";
+import useWriter from "../../../hooks/useWriter";
 
 const CreateWriter = () => {
-  const { register, handleSubmit } = useForm();
+  const params = useParams();
+  const { register, handleSubmit, setValue } = useForm();
+
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const writerState = useWriter();
+
+  const { isCreateSuccess, isUpdateSuccess, isSingleSuccess, singleData } = writerState;
 
   const inputChangeHandler = (data) => {
     console.log("inputChangeHandler:");
@@ -12,7 +28,43 @@ const CreateWriter = () => {
 
   const submitHandler = (data) => {
     console.log("submit handler :", data);
+
+    const requestBody = {
+      id: uuidv4(),
+      name: data.name,
+      dob: data.dob,
+      phone: data.phone,
+      gmail: data.gmail,
+    };
+
+    if (params.id) {
+      dispatch(updateWriter({ requestBody: requestBody, id: params.id }));
+    } else {
+      dispatch(createWriter(requestBody));
+    }
   };
+
+  useEffect(() => {
+    if (isUpdateSuccess) {
+      navigate("/dashboard/writers");
+    }
+  }, [isUpdateSuccess]);
+
+  useEffect(() => {
+    if (isSingleSuccess && singleData) {
+      setValue("name", singleData.name);
+      setValue("dob", singleData.dob);
+      setValue("phone", singleData.phone);
+      setValue("gmail", singleData.gmail);
+    }
+  }, [isSingleSuccess, singleData]);
+
+
+  useEffect(() => {
+    if (isCreateSuccess) {
+      navigate("/Dashboard/writers");
+    }
+  }, [isCreateSuccess]);
 
   return (
     <div className="w-full">
@@ -98,14 +150,12 @@ const CreateWriter = () => {
               </div>
             </div>
 
-          
-
             <div className="w-full pt-2 px-1 text-right">
               <button
                 type="submit"
                 className="px-3 rounded-md py-1 border border-green-600 ml-auto text-sm flex items-center justify-center"
               >
-                Submit <FaRegPaperPlane size={15} className="ml-2"/>
+                Submit <FaRegPaperPlane size={15} className="ml-2" />
               </button>
             </div>
           </form>

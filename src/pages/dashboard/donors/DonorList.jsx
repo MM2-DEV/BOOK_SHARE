@@ -4,27 +4,36 @@ import { FaPen } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import useDonorList from "../../../hooks/useDonorList";
 import { FaPlus } from "react-icons/fa6";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { deleteDonor } from "../../../store/actions/donors/donorsActionHandlers";
 
 const DonorList = () => {
   const { isListLoading, listError, listData } = useDonorList();
   console.log("listdata:", listData);
 
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const deleteHandler = (id) => {
+    dispatch(deleteDonor(id));
+  };
+
   return (
     <div className="w-full">
       <div className="bg-slate-100 p-3 rounded-lg flex items-center justify-between">
-       <div>
-       <h2 className="text-xl">All Donors</h2>
-        <p className="text-xs">All donor list of this virtual library</p>
-       </div>
-       <div>
-       <Link to="/dashboard/donors/create">
-       <button className=" bg-blue-500 hover:bg-blue-700 text-white flex items-center justify-center py-2 px-4 rounded-full">
-         <FaPlus color="#fff" className="mr-1"/> Add New
-        </button>
-       </Link>
-       </div>
+        <div>
+          <h2 className="text-xl">All Donors</h2>
+          <p className="text-xs">All donor list of this virtual library</p>
+        </div>
+        <div>
+          <Link to="/dashboard/donors/create">
+            <button className=" bg-blue-500 hover:bg-blue-700 text-white flex items-center justify-center py-2 px-4 rounded-full">
+              <FaPlus color="#fff" className="mr-1" /> Add New
+            </button>
+          </Link>
+        </div>
       </div>
 
       <div className="mt-5 bg-slate-100 p-3 rounded-lg">
@@ -47,6 +56,9 @@ const DonorList = () => {
                   Email
                 </th>
                 <th className="border border-green-600 px-[20px] py-[5px]">
+                  Total Book
+                </th>
+                <th className="border border-green-600 px-[20px] py-[5px]">
                   Action
                 </th>
               </thead>
@@ -55,27 +67,34 @@ const DonorList = () => {
                   return (
                     <tr>
                       <td className="border border-green-600 px-[20px] py-[5px]">
-                        User Name
+                        {item.name}
                       </td>
                       <td className="border border-green-600 px-[20px] py-[5px]">
                         {item.dob}
                       </td>
                       <td className="border border-green-600 px-[20px] py-[5px]">
-                        Phone
+                        {item.phone}
                       </td>
                       <td className="border border-green-600 px-[20px] py-[5px]">
-                        Email
+                        {item.gmail}
+                      </td>
+                      <td className="border border-green-600 px-[20px] py-[5px]">
+                        {item.book.length}
                       </td>
                       <td className="border border-green-600 px-[20px] py-[5px]">
                         <div className="w-full flex items-center justify-between">
                           <div>
-                            <FaRegEye size={25} color="#60a5fa"/>
+                            <FaRegEye size={25} color="#60a5fa" />
                           </div>
-                          <div>
-                            <FaPen size={22} color="#eab308"/>
+                          <div
+                            onClick={() =>
+                              navigate(`/dashboard/donors/create/${item.id}`)
+                            }
+                          >
+                            <FaPen size={22} color="#eab308" />
                           </div>
-                          <div>
-                            <MdDelete size={25} color="#f43f5e"/>
+                          <div onClick={() => deleteHandler(item.id)}>
+                            <MdDelete size={25} color="#f43f5e" />
                           </div>
                         </div>
                       </td>

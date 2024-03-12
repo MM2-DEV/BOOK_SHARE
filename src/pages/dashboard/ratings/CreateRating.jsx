@@ -9,6 +9,8 @@ import {
 } from "../../../store/actions/ratings/ratingsActionHandler";
 import { useNavigate, useParams } from "react-router-dom";
 import useRating from "../../../hooks/useRating";
+import { v4 as uuidv4 } from 'uuid';
+
 
 const CreateRating = () => {
   const { register, handleSubmit, setValue } = useForm();
@@ -33,7 +35,7 @@ const CreateRating = () => {
     console.log("submit handler :", data);
 
     const requestBody = {
-      id: 2,
+      id: uuidv4(),
       bookId: Number(data.book),
       userId: 1,
       ratingValue: data.ratingValue,

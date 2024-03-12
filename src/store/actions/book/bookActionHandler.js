@@ -9,6 +9,14 @@ export const getBookList = createAsyncThunk("book/getBookList", async () => {
   return res.data;
 });
 
+export const getBook = createAsyncThunk("book/getBook", async (id) => {
+  const url = `https://book-share-json-server.onrender.com/books/${id}`;
+  const res = await axios.get(url);
+  console.log("res:", res)
+
+  return res.data;
+});
+
 export const createBook = createAsyncThunk(
   "book/createBook",
   async (inputState) => {
@@ -24,12 +32,13 @@ export const createBook = createAsyncThunk(
 
 export const updateBook = createAsyncThunk(
   "book/updateBook",
-  async (inputState) => {
-    console.log("request body:", inputState);
+  async (data) => {
+    console.log("request body:", data.requestBody);
+    console.log("id:", data.id);
 
-    const url = `https://book-share-json-server.onrender.com/books${id}`;
+    const url = `https://book-share-json-server.onrender.com/books${data.id}`;
 
-    const res = await axios.put(url, inputState);
+    const res = await axios.put(url, data.requestBody);
 
     return res.data;
   }
