@@ -78,6 +78,10 @@ const routes1 = createBrowserRouter([
             path: "create",
             element: <CreateBook />,
           },
+          {
+            path: "create/:id",
+            element: <CreateBook />,
+          },
         ],
       },
 
@@ -86,10 +90,14 @@ const routes1 = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <WriterList/>,
+            element: <WriterList />,
           },
           {
             path: "create",
+            element: <CreateWriter />,
+          },
+          {
+            path: "create/:id",
             element: <CreateWriter />,
           },
         ],
@@ -99,10 +107,14 @@ const routes1 = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <DonorList/>,
+            element: <DonorList />,
           },
           {
             path: "create",
+            element: <CreateDonor />,
+          },
+          {
+            path: "create/:id",
             element: <CreateDonor />,
           },
         ],
@@ -113,15 +125,15 @@ const routes1 = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <GenreList/>,
+            element: <GenreList />,
           },
           {
             path: "create",
-            element: <CreateGenre/>,
+            element: <CreateGenre />,
           },
           {
             path: "create/:id",
-            element: <CreateGenre/>,
+            element: <CreateGenre />,
           },
         ],
       },
@@ -131,11 +143,15 @@ const routes1 = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <RatingList/>,
+            element: <RatingList />,
           },
           {
             path: "create",
-            element: <CreateRating/>,
+            element: <CreateRating />,
+          },
+          {
+            path: "create/:id",
+            element: <CreateRating />,
           },
         ],
       },
@@ -145,11 +161,15 @@ const routes1 = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <ReviewList/>,
+            element: <ReviewList />,
           },
           {
             path: "create",
-            element: <CreateReview/>,
+            element: <CreateReview />,
+          },
+          {
+            path: "create/:id",
+            element: <CreateReview />,
           },
         ],
       },
@@ -159,15 +179,14 @@ const routes1 = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <ReaderList/>,
+            element: <ReaderList />,
           },
           {
             path: "create",
-            element: <CreateReader/>,
+            element: <CreateReader />,
           },
         ],
       },
-
     ],
   },
 ]);

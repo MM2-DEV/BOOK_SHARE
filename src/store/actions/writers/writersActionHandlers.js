@@ -2,7 +2,15 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const getWriterList = createAsyncThunk("writers/getWriterList", async () => {
-  const url = "https://book-share-json-server.onrender.com/writers";
+  const url = "https://book-share-json-server.onrender.com/writers?_embed=book";
+  const res = await axios.get(url);
+  console.log("res:", res)
+
+  return res.data;
+});
+
+export const getWriter = createAsyncThunk("writers/getWriter", async (id) => {
+  const url = `https://book-share-json-server.onrender.com/writers?_embed=book/${id}`;
   const res = await axios.get(url);
   console.log("res:", res)
 
@@ -14,7 +22,7 @@ export const createWriter = createAsyncThunk(
   async (inputState) => {
     console.log("request body:", inputState);
 
-    const url = "https://book-share-json-server.onrender.com/books";
+    const url = "https://book-share-json-server.onrender.com/writers";
 
     const res = await axios.post(url, inputState);
 
@@ -24,19 +32,21 @@ export const createWriter = createAsyncThunk(
 
 export const updateWriter = createAsyncThunk(
   "writers/updateWriter",
-  async (inputState) => {
-    console.log("request body:", inputState);
+  async (data) => {
+    console.log("request body:", data.requestBody);
+    console.log("id:", data.id);
 
-    const url = `https://book-share-json-server.onrender.com/writers${id}}`;
 
-    const res = await axios.put(url, inputState);
+    const url = `https://book-share-json-server.onrender.com/writers/${data.id}`;
+
+    const res = await axios.put(url, data.requestBody);
 
     return res.data;
   }
 );
 
 export const deleteWriter = createAsyncThunk("writers/deleteWriter", async (id) => {
-  const url = `https://book-share-json-server.onrender.com/writers${id}}`;
+  const url = `https://book-share-json-server.onrender.com/writers/${id}`;
 
   const res = await axios.delete(url);
 

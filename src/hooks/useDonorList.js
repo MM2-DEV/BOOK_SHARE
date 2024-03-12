@@ -3,15 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { getDonorList } from "../store/actions/donors/donorsActionHandlers";
 
 const useDonorList = () => {
-  const donorList = useSelector((store) => store.donors);
+  const donorState = useSelector((store) => store.donors);
+
   const dispatch = useDispatch();
-  console.log("donorList:", donorList)
+
+  const { isDeleteSuccess } = donorState;
 
   useEffect(() => {
     dispatch(getDonorList());
-  }, []);
+  }, [isDeleteSuccess]);
 
-  return donorList;
+  return donorState;
 };
 
 export default useDonorList;
