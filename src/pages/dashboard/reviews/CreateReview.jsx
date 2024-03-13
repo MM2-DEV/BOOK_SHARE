@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FaRegPaperPlane } from "react-icons/fa";
 import useBookList from "../../../hooks/useBookList";
 import { useDispatch } from "react-redux";
-import { createReview } from "../../../store/actions/reviews/reviewsActionHandlers";
+import {
+  createReview,
+  updateReview,
+} from "../../../store/actions/reviews/reviewsActionHandlers";
+import { v4 as uuidv4 } from "uuid";
+import { useNavigate, useParams } from "react-router-dom";
+import useReview from "../../../hooks/useReview";
 
 const CreateReview = () => {
-  const { register, handleSubmit } = useForm();
+  const params = useParams();
+
+  const { register, handleSubmit, setValue } = useForm();
+
+  const navigate = useNavigate();
+
+  const reviewState = useReview();
+
+  const { isCreateSuccess, isSingleSuccess, isUpdateSuccess, singleData } =
+    reviewState;
 
   const { isListLoading, listError, listData } = useBookList();
 
@@ -20,15 +35,39 @@ const CreateReview = () => {
     console.log("submit handler :", data);
 
     const requestBody = {
-      id: 4,
+      id: uuidv4(),
       bookId: Number(data.book),
       userId: 1,
       reviewContent: data.reviewContent,
       date: data.date,
     };
 
-    dispatch(createReview(requestBody));
+    if (params.id) {
+      dispatch(updateReview({ requestBody: requestBody, id: params.id }));
+    } else {
+      dispatch(createReview(requestBody));
+    }
   };
+
+  useEffect(() => {
+    if (isCreateSuccess) {
+      navigate("/dashboard/reviews");
+    }
+  }, [isCreateSuccess]);
+
+  useEffect(() => {
+    if (isUpdateSuccess) {
+      navigate("/dashboard/reviews");
+    }
+  }, [isUpdateSuccess]);
+
+  useEffect(() => {
+    if (isSingleSuccess && singleData) {
+      setValue("book", singleData.book);
+      setValue("reviewContent", singleData.reviewContent);
+      setValue("date", singleData.date);
+    }
+  }, [isSingleSuccess, singleData]);
 
   return (
     <div className="w-full">

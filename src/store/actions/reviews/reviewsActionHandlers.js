@@ -2,8 +2,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const getReviewList = createAsyncThunk("reviews/getReviewList", async () => {
-  // const url = "https://book-share-json-server.onrender.com/reviews?_expand=book&_expand=user";
-  const url = "https://book-share-json-server.onrender.com/reviews";
+
+  const url = "https://book-share-json-server.onrender.com/reviews?_expand=book&_expand=user";
 
   const res = await axios.get(url);
   console.log("res:", res)
@@ -12,8 +12,8 @@ export const getReviewList = createAsyncThunk("reviews/getReviewList", async () 
 });
 
 export const getReview = createAsyncThunk("reviews/getReview", async (id) => {
-  // const url = "https://book-share-json-server.onrender.com/reviews?_expand=book&_expand=user";
-  const url = `https://book-share-json-server.onrender.com/reviews/${id}`;
+
+  const url = `https://book-share-json-server.onrender.com/reviews?_expand=book&_expand=user/${id}`;
 
   const res = await axios.get(url);
   console.log("res:", res)
@@ -42,7 +42,7 @@ export const updateReview = createAsyncThunk(
     console.log("request body:", data.requestBody);
     console.log("id", data.id)
 
-    const url = `https://book-share-json-server.onrender.com/reviews/${id}`;
+    const url = `https://book-share-json-server.onrender.com/reviews/${data.id}`;
 
     const res = await axios.put(url, data.requestBody);
 

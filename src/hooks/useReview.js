@@ -14,8 +14,8 @@ const useReview = () => {
     if (params.id) {
       dispatch(getReview(params.id));
     }
-  });
-  return useReview;
+  },[]);
+  return reviewState;
 };
 
 export default useReview;

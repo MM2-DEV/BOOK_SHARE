@@ -4,7 +4,7 @@ import { FaPen } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import useReviewList from "../../../hooks/useReviewList";
 import { FaPlus } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deleteReview } from "../../../store/actions/reviews/reviewsActionHandlers";
 
@@ -12,9 +12,11 @@ const ReviewList = () => {
   const { isListLoading, listError, listData } = useReviewList();
   console.log("listdata:", listData);
 
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
 
-  const deleteReviewHandler = (id) => {
+  const deleteHandler = (id) => {
     console.log("id:", id);
     dispatch(deleteReview(id));
   };
@@ -32,7 +34,7 @@ const ReviewList = () => {
               type="button"
               className=" bg-blue-500 hover:bg-blue-700 text-white flex items-center justify-center py-2 px-4 rounded-full"
             >
-              <FaPlus color="#fff" className="mr-1"/> Add New
+              <FaPlus color="#fff" className="mr-1" /> Add New
             </button>
           </Link>
         </div>
@@ -83,10 +85,14 @@ const ReviewList = () => {
                           <div>
                             <FaRegEye size={25} color="#60a5fa" />
                           </div>
-                          <div>
+                          <div
+                            onClick={() =>
+                              navigate(`/dashboard/reviews/create/${item.id}`)
+                            }
+                          >
                             <FaPen size={22} color="#eab308" />
                           </div>
-                          <div onClick={() => deleteReviewHandler(item.id)}>
+                          <div onClick={() => deleteHandler(item.id)}>
                             <MdDelete size={25} color="#f43f5e" />
                           </div>
                         </div>
