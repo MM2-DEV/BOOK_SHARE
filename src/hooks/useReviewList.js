@@ -3,15 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { getReviewList } from "../store/actions/reviews/reviewsActionHandlers";
 
 const useReviewList = () => {
-  const reviewList = useSelector((store) => store.reviews);
+  const reviewState = useSelector((store) => store.reviews);
   const dispatch = useDispatch();
-  console.log("reviewList:", reviewList)
+  console.log("reviewState:", reviewState)
+
+  const {isDeleteSuccess} = reviewState
 
   useEffect(() => {
     dispatch(getReviewList());
-  }, []);
+  }, [isDeleteSuccess]);
 
-  return reviewList;
+  return reviewState;
 };
 
 export default useReviewList;
