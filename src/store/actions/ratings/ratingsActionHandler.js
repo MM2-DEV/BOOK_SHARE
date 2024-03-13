@@ -18,7 +18,7 @@ export const getRatingList = createAsyncThunk(
 
 export const getRating = createAsyncThunk("ratings/getRating", async (id) => {
 
-  const url = `https://book-share-json-server.onrender.com/ratings?_expand=book&_expand=user/${id}`;
+  const url = `https://book-share-json-server.onrender.com/ratings/${id}?_expand=book&_expand=user`;
 
   const res = await axios.get(url);
   console.log("res:", res);

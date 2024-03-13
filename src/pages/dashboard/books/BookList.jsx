@@ -4,27 +4,39 @@ import { FaPen } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import useBookList from "../../../hooks/useBookList";
 import { FaPlus } from "react-icons/fa6";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { deleteBook } from "../../../store/actions/book/bookActionHandler";
 
 const BookList = () => {
   const { isListLoading, listError, listData } = useBookList();
   console.log("listdata:", listData);
 
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const deleteHandler = (id) => {
+    dispatch(deleteBook(id));
+  };
+
   return (
     <div className="w-full">
       <div className="bg-slate-100 p-3 rounded-lg flex items-center justify-between">
-      <div>
-      <h2 className="text-xl">All Books</h2>
-        <p className="text-xs">All book list of this virtual library</p>
-      </div>
-      <div>
-        <Link to="/dashboard/books/create">
-        <button type="button" className="bg-blue-500 hover:bg-blue-700 text-white flex items-center justify-center py-2 px-4 rounded-full">
-         <FaPlus color="#fff" className="mr-1"/> Add New
-        </button>
-        </Link>
-      </div>
+        <div>
+          <h2 className="text-xl">All Books</h2>
+          <p className="text-xs">All book list of this virtual library</p>
+        </div>
+        <div>
+          <Link to="/dashboard/books/create">
+            <button
+              type="button"
+              className="bg-blue-500 hover:bg-blue-700 text-white flex items-center justify-center py-2 px-4 rounded-full"
+            >
+              <FaPlus color="#fff" className="mr-1" /> Add New
+            </button>
+          </Link>
+        </div>
       </div>
 
       <div className="mt-5 bg-slate-100 p-3 rounded-lg">
@@ -82,7 +94,7 @@ const BookList = () => {
                   return (
                     <tr>
                       <td className="border border-green-600 px-[20px] py-[5px]">
-                         {item.nameEn}
+                        {item.nameEn}
                       </td>
                       <td className="border border-green-600 px-[20px] py-[5px]">
                         {item.nameBn}
@@ -91,7 +103,7 @@ const BookList = () => {
                         {item.totalAvailable}
                       </td>
                       <td className="border border-green-600 px-[20px] py-[5px]">
-                        Quantity
+                        {item.totalCount}
                       </td>
                       <td className="border border-green-600 px-[20px] py-[5px]">
                         {item.edition}
@@ -109,24 +121,28 @@ const BookList = () => {
                         Donor Name
                       </td>
                       <td className="border border-green-600 px-[20px] py-[5px]">
-                        Donate Date
+                        {item.donorDate}
                       </td>
                       <td className="border border-green-600 px-[20px] py-[5px]">
-                        Price
+                        {item.price}
                       </td>
                       <td className="border border-green-600 px-[20px] py-[5px]">
-                        Purchase Date
+                        {item.purchaseDate}
                       </td>
                       <td className="border border-green-600 px-[20px] py-[5px]">
                         <div className="w-full flex gap-2 items-center justify-between">
                           <div>
-                            <FaRegEye size={25} color="#60a5fa"/>
+                            <FaRegEye size={25} color="#60a5fa" />
                           </div>
-                          <div>
-                            <FaPen size={22} color="#eab308"/>
+                          <div
+                            onClick={() =>
+                              navigate(`/dashboard/books/create/${item.id}`)
+                            }
+                          >
+                            <FaPen size={22} color="#eab308" />
                           </div>
-                          <div>
-                            <MdDelete size={25} color="#f43f5e"/>
+                          <div onClick={() => deleteHandler(item.id)}>
+                            <MdDelete size={25} color="#f43f5e" />
                           </div>
                         </div>{" "}
                       </td>
