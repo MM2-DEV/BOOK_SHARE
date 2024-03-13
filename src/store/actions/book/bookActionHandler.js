@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const getBookList = createAsyncThunk("book/getBookList", async () => {
-  const url = "https://book-share-json-server.onrender.com/books";
+  const url = "https://book-share-json-server.onrender.com/books?_expand=genre&_expand=writer&_expand=bookDonorId";
   const res = await axios.get(url);
   console.log("res:", res)
 
@@ -10,7 +10,7 @@ export const getBookList = createAsyncThunk("book/getBookList", async () => {
 });
 
 export const getBook = createAsyncThunk("book/getBook", async (id) => {
-  const url = `https://book-share-json-server.onrender.com/books/${id}`;
+  const url = `https://book-share-json-server.onrender.com/books/${id}?_expand=genre&_expand=writer&_expand=bookDonorId`;
   const res = await axios.get(url);
   console.log("res:", res)
 
@@ -19,12 +19,12 @@ export const getBook = createAsyncThunk("book/getBook", async (id) => {
 
 export const createBook = createAsyncThunk(
   "book/createBook",
-  async (inputState) => {
-    console.log("request body:", inputState);
+  async (requestBody) => {
+    console.log("request body:", requestBody);
 
     const url = "https://book-share-json-server.onrender.com/books";
 
-    const res = await axios.post(url, inputState);
+    const res = await axios.post(url, requestBody);
 
     return res.data;
   }

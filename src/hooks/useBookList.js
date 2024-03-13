@@ -3,15 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBookList } from "../store/actions/book/bookActionHandler";
 
 const useBookList = () => {
-  const bookList = useSelector((store) => store.book);
+  const bookState = useSelector((store) => store.book);
   const dispatch = useDispatch();
-  console.log("bookList:", bookList)
+  console.log("bookList:", bookState)
+
+  const {isDeleteSuccess} = bookState
 
   useEffect(() => {
     dispatch(getBookList());
-  }, []);
+  }, [isDeleteSuccess]);
 
-  return bookList;
+  return bookState;
 };
 
 export default useBookList;

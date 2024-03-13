@@ -11,6 +11,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import useWriter from "../../../hooks/useWriter";
 
 const CreateWriter = () => {
+
   const params = useParams();
   const { register, handleSubmit, setValue } = useForm();
 
@@ -22,12 +23,15 @@ const CreateWriter = () => {
 
   const { isCreateSuccess, isUpdateSuccess, isSingleSuccess, singleData } = writerState;
 
+  console.log("singleData", singleData)
+
   const inputChangeHandler = (data) => {
     console.log("inputChangeHandler:");
   };
 
   const submitHandler = (data) => {
     console.log("submit handler :", data);
+
 
     const requestBody = {
       id: uuidv4(),
