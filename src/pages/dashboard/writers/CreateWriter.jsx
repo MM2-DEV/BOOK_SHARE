@@ -45,6 +45,7 @@ const CreateWriter = () => {
       dispatch(updateWriter({ requestBody: requestBody, id: params.id }));
     } else {
       dispatch(createWriter(requestBody));
+      
     }
   };
 

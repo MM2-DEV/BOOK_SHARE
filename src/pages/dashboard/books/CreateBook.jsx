@@ -62,15 +62,15 @@ const CreateBook = () => {
       nameEn: data.nameEn,
       nameBn: data.nameBn,
       isDonateOrBuy: data.isDonateOrBuy,
-      totalAvailable: Number(data.totalAvailable),
-      totalCount: Number(data.totalCount),
-      edition: Number(data.edition),
-      genreId: Number(data.genreId),
-      writerId: Number(data.writerId),
-      bookDonorId: Number(data.writerId),
+      totalAvailable: data.totalAvailable,
+      totalCount: data.totalCount,
+      edition: data.edition,
+      genreId: data.genreId,
+      writerId: data.writerId,
+      bookDonorId: data.writerId,
       donateDate: data.donateDate,
       purchaseDate: data.purchaseDate,
-      price: Number(data.price),
+      price: data.price,
     };
 
     if (params.id) {
