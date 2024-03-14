@@ -49,6 +49,27 @@ const userSlice = createSlice({
       state.isListSuccess = false;
       state.listData = null;
       state.listError = null;
+
+      state.isSingleLoading = false;
+      state.isSingleError = false;
+      state.isSingleSuccess = false;
+      state.singleData = null;
+      state.singleError = null;
+
+      state.isCreateLoading = false;
+      state.isCreateError = false;
+      state.isCreateSuccess = false;
+      state.createError = null;
+
+      state.isUpdateLoading = false;
+      state.isUpdateError = false;
+      state.isUpdateSuccess = false;
+      state.updateError = null;
+
+      state.isDeleteLoading = false;
+      state.isDeleteError = false;
+      state.isDeleteSuccess = false;
+      state.deleteError = null;
     });
 
     builder.addCase(getGenreList.rejected, (state, action) => {

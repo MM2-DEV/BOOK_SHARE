@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { appendErrors, useForm } from "react-hook-form";
 import { FaRegPaperPlane } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -8,9 +8,19 @@ import {
 } from "../../../store/actions/genres/genresActionHandlers";
 import { useNavigate, useParams } from "react-router-dom";
 import useGenre from "../../../hooks/useGenre";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { createGenreSchema } from "../../../validation/dashboard/genre";
+import { toast } from "react-toastify";
 
 const CreateGenre = () => {
-  const { register, handleSubmit, setValue } = useForm();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(createGenreSchema),
+  });
 
   const navigate = useNavigate();
 
@@ -20,7 +30,14 @@ const CreateGenre = () => {
 
   const params = useParams();
 
-  const { isCreateSuccess, isSingleSuccess, singleData, isUpdateSuccess } = genreState;
+  const {
+    isCreateSuccess,
+    isSingleSuccess,
+    singleData,
+    isUpdateSuccess,
+    isCreateError,
+    isUpdateError,
+  } = genreState;
 
   console.log("isSingleSuccess", isSingleSuccess);
   console.log("singleData", singleData);
@@ -40,7 +57,7 @@ const CreateGenre = () => {
     };
 
     if (params.id) {
-      dispatch(updateGenre({requestBody:requestBody,id:params.id}));
+      dispatch(updateGenre({ requestBody: requestBody, id: params.id }));
     } else {
       dispatch(createGenre(requestBody));
     }
@@ -48,15 +65,34 @@ const CreateGenre = () => {
 
   useEffect(() => {
     if (isCreateSuccess) {
+      toast.success("Genre created successfully.", {
+        position: "top-right",
+      });
+
       navigate("/dashboard/genres");
     }
-  }, [isCreateSuccess]);
+
+    if (isCreateError) {
+      toast.error("Genre does not created.", {
+        position: "top-right",
+      });
+    }
+  }, [isCreateSuccess, isCreateError]);
 
   useEffect(() => {
     if (isUpdateSuccess) {
+      toast.success("Genre updated successfully", {
+        position: "top-right",
+      });
       navigate("/dashboard/genres");
     }
-  }, [isUpdateSuccess]);
+
+    if (isUpdateError) {
+      toast.success("Genre updated successfully", {
+        position: "top-right",
+      });
+    }
+  }, [isUpdateSuccess, isUpdateError]);
 
   useEffect(() => {
     if (isSingleSuccess && singleData) {
@@ -89,6 +125,7 @@ const CreateGenre = () => {
                   placeholder="Enter Name"
                   onChange={inputChangeHandler}
                 />
+                <p className=" text-red-600">{errors?.name?.message}</p>
               </div>
             </div>
 
@@ -104,6 +141,7 @@ const CreateGenre = () => {
                   className="w-full p-2 border rounded-md focus:border-green-900 focus:outline-none placeholder:text-sm"
                   placeholder="Enter Description"
                 ></textarea>
+                <p className=" text-red-600">{errors?.description?.message}</p>
               </div>
             </div>
 
@@ -119,6 +157,7 @@ const CreateGenre = () => {
                   className="w-full p-2 border rounded-md focus:border-green-900 focus:outline-none placeholder:text-sm"
                   onChange={inputChangeHandler}
                 />
+                <p className="text-red-600">{errors?.date?.message}</p>
               </div>
             </div>
 
