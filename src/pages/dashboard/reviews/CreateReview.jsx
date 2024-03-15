@@ -12,6 +12,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import useReview from "../../../hooks/useReview";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createReviewSchema } from "../../../validation/dashboard/review";
+import { toast } from "react-toastify";
 
 
 const CreateReview = () => {
@@ -25,7 +26,7 @@ const CreateReview = () => {
 
   const reviewState = useReview();
 
-  const { isCreateSuccess, isSingleSuccess, isUpdateSuccess, singleData } =
+  const { isCreateSuccess, isSingleSuccess, isUpdateSuccess, singleData, isCreateError, isUpdateError } =
     reviewState;
 
   const { isListLoading, listError, listData } = useBookList();
@@ -56,15 +57,34 @@ const CreateReview = () => {
 
   useEffect(() => {
     if (isCreateSuccess) {
+      toast.success("Review created successfully.", {
+        position: "top-right",
+      });
+
       navigate("/dashboard/reviews");
     }
-  }, [isCreateSuccess]);
+
+    if (isCreateError) {
+      toast.error("Review was not created.", {
+        position: "top-right",
+      });
+    }
+  }, [isCreateSuccess, isCreateError]);
 
   useEffect(() => {
     if (isUpdateSuccess) {
+      toast.success("Review updated successfully.", {
+        position: "top-right",
+      });
       navigate("/dashboard/reviews");
     }
-  }, [isUpdateSuccess]);
+
+    if (isUpdateError) {
+      toast.success("Review was not updated.", {
+        position: "top-right",
+      });
+    }
+  }, [isUpdateSuccess, isUpdateError]);
 
   useEffect(() => {
     if (isSingleSuccess && singleData) {
