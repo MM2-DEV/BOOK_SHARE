@@ -12,6 +12,7 @@ import useRating from "../../../hooks/useRating";
 import { v4 as uuidv4 } from 'uuid';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createRatingSchema } from "../../../validation/dashboard/rating";
+import { toast } from "react-toastify";
 
 
 
@@ -26,7 +27,7 @@ const CreateRating = () => {
 
   const params = useParams();
 
-  const { isCreateSuccess, isSingleSuccess,  isUpdateSuccess, singleData } = ratingState;
+  const { isCreateSuccess, isSingleSuccess,  isUpdateSuccess, singleData, isCreateError, isUpdateError } = ratingState;
 
   const { isListLoading, listError, listData } = useBookList();
 
@@ -56,15 +57,35 @@ const CreateRating = () => {
 
   useEffect(() => {
     if (isCreateSuccess) {
+      toast.success("Rating created successfully.", {
+        position: "top-right",
+      });
+
       navigate("/dashboard/ratings");
     }
-  }, [isCreateSuccess]);
 
-  useEffect(()=>{
-    if(isUpdateSuccess){
-      navigate("/dashboard/ratings")
+    if (isCreateError) {
+      toast.error("Rating was not created.", {
+        position: "top-right",
+      });
     }
-  },[isUpdateSuccess])
+  }, [isCreateSuccess, isCreateError]);
+
+  useEffect(() => {
+    if (isUpdateSuccess) {
+      toast.success("Rating updated successfully.", {
+        position: "top-right",
+      });
+      navigate("/dashboard/ratings");
+    }
+
+    if (isUpdateError) {
+      toast.success("Rating was not updated.", {
+        position: "top-right",
+      });
+    }
+  }, [isUpdateSuccess, isUpdateError]);
+
 
   useEffect(() => {
     if (isSingleSuccess && singleData) {

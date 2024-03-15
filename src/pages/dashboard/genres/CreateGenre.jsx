@@ -73,7 +73,7 @@ const CreateGenre = () => {
     }
 
     if (isCreateError) {
-      toast.error("Genre does not created.", {
+      toast.error("Genre was not created.", {
         position: "top-right",
       });
     }
@@ -81,14 +81,14 @@ const CreateGenre = () => {
 
   useEffect(() => {
     if (isUpdateSuccess) {
-      toast.success("Genre updated successfully", {
+      toast.success("Genre updated successfully.", {
         position: "top-right",
       });
       navigate("/dashboard/genres");
     }
 
     if (isUpdateError) {
-      toast.success("Genre updated successfully", {
+      toast.success("Genre was not updated.", {
         position: "top-right",
       });
     }

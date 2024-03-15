@@ -59,30 +59,6 @@ const CreateWriter = () => {
   };
 
   useEffect(() => {
-    if (isUpdateSuccess) {
-      toast.success("Writer updated successfully", {
-        position: "top-right",
-      });
-      navigate("/dashboard/writers");
-    }
-
-    if (isUpdateError) {
-      toast.success("Writer updated successfully", {
-        position: "top-right",
-      });
-    }
-  }, [isUpdateSuccess, isUpdateError]);
-
-  useEffect(() => {
-    if (isSingleSuccess && singleData) {
-      setValue("name", singleData.name);
-      setValue("dob", singleData.dob);
-      setValue("phone", singleData.phone);
-      setValue("gmail", singleData.gmail);
-    }
-  }, [isSingleSuccess, singleData]);
-
-  useEffect(() => {
     if (isCreateSuccess) {
       toast.success("Writer created successfully.", {
         position: "top-right",
@@ -97,6 +73,32 @@ const CreateWriter = () => {
       });
     }
   }, [isCreateSuccess, isCreateError]);
+
+  useEffect(() => {
+    if (isUpdateSuccess) {
+      toast.success("Writer updated successfully.", {
+        position: "top-right",
+      });
+      navigate("/dashboard/writers");
+    }
+
+    if (isUpdateError) {
+      toast.success("Writer was not updated.", {
+        position: "top-right",
+      });
+    }
+  }, [isUpdateSuccess, isUpdateError]);
+
+  useEffect(() => {
+    if (isSingleSuccess && singleData) {
+      setValue("name", singleData.name);
+      setValue("dob", singleData.dob);
+      setValue("phone", singleData.phone);
+      setValue("gmail", singleData.gmail);
+    }
+  }, [isSingleSuccess, singleData]);
+
+  
   return (
     <div className="w-full">
       <div className="bg-slate-100 p-3 rounded-lg">

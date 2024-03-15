@@ -80,14 +80,14 @@ const CreateDonor = () => {
 
   useEffect(() => {
     if (isUpdateSuccess) {
-      toast.success("Donor updated successfully", {
+      toast.success("Donor updated successfully.", {
         position: "top-right",
       });
       navigate("/dashboard/donors");
     }
 
     if (isUpdateError) {
-      toast.success("Donor updated successfully", {
+      toast.success("Donor was not updated.", {
         position: "top-right",
       });
     }
