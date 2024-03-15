@@ -11,6 +11,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import useDonor from "../../../hooks/useDonor";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createDonorSchema } from "../../../validation/dashboard/donor";
+import { toast } from "react-toastify";
 
 const CreateDonor = () => {
   const {
@@ -30,8 +31,14 @@ const CreateDonor = () => {
 
   const dispatch = useDispatch();
 
-  const { isCreateSuccess, isSingleSuccess, singleData, isUpdateSuccess } =
-    donorState;
+  const {
+    isCreateSuccess,
+    isSingleSuccess,
+    singleData,
+    isUpdateSuccess,
+    isCreateError,
+    isUpdateError,
+  } = donorState;
 
   const inputChangeHandler = (data) => {
     console.log("inputChangeHandler:");
@@ -56,10 +63,35 @@ const CreateDonor = () => {
   };
 
   useEffect(() => {
-    if (isUpdateSuccess) {
+    if (isCreateSuccess) {
+      toast.success("Donor created successfully.", {
+        position: "top-right",
+      });
+
       navigate("/dashboard/donors");
     }
-  }, [isUpdateSuccess]);
+
+    if (isCreateError) {
+      toast.error("Donor was not created.", {
+        position: "top-right",
+      });
+    }
+  }, [isCreateSuccess, isCreateError]);
+
+  useEffect(() => {
+    if (isUpdateSuccess) {
+      toast.success("Donor updated successfully", {
+        position: "top-right",
+      });
+      navigate("/dashboard/donors");
+    }
+
+    if (isUpdateError) {
+      toast.success("Donor updated successfully", {
+        position: "top-right",
+      });
+    }
+  }, [isUpdateSuccess, isUpdateError]);
 
   useEffect(() => {
     if (isSingleSuccess && singleData) {
@@ -69,12 +101,6 @@ const CreateDonor = () => {
       setValue("gmail", singleData.gmail);
     }
   }, [isSingleSuccess, singleData]);
-
-  useEffect(() => {
-    if (isCreateSuccess) {
-      navigate("/Dashboard/donors");
-    }
-  }, [isCreateSuccess]);
 
   return (
     <div className="w-full">
