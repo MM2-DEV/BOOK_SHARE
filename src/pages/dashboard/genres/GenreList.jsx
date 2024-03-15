@@ -12,7 +12,9 @@ import { toast } from "react-toastify";
 
 const GenreList = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
   const [deleteId, setDeleteId] = useState(null);
+
   const { isListLoading, listError, listData, isDeleteSuccess, isDeleteError } =
     useGenreList();
 

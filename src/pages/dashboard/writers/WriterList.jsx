@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaRegEye } from "react-icons/fa";
 import { FaPen } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
@@ -7,20 +7,53 @@ import { FaPlus } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deleteWriter } from "../../../store/actions/writers/writersActionHandlers";
+import ConfirmDeleteModal from "../../../components/shared/ConfirmDeleteModal";
+import { toast } from "react-toastify";
 
 const WriterList = () => {
-  const { isListLoading, listError, listData } = useWriterList();
+
+  const[isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+
+  const [deleteId, setDeleteId] = useState(null)
+
+  const { isListLoading, listError, listData, isDeleteSuccess, isDeleteError } = useWriterList();
   console.log("listdata:", listData);
 
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
-  const deleteHandler = (id) => {
-    dispatch(deleteWriter(id));
+  const closeHandler = ()=>{
+    setIsDeleteModalOpen(false)
+  }
+
+  const openHandler = (id)=>{
+    setDeleteId(id)
+    setIsDeleteModalOpen(true)
+  }
+
+  const deleteHandler = () => {
+    dispatch(deleteWriter(deleteId));
   };
 
+  
+  useEffect(() => {
+    if (isDeleteSuccess) {
+      toast.success("Writer deleted successfully.", {
+        position: "top-right",
+      });
+      setIsDeleteModalOpen(false);
+    }
+
+    if (isDeleteError) {
+      toast.error("Writer was not delete.", {
+        position: "top-right",
+      });
+    }
+  }, [isDeleteSuccess, isDeleteError]);
+
   return (
+ <>
     <div className="w-full">
       <div className="bg-slate-100 p-3 rounded-lg flex items-center justify-between">
         <div>
@@ -92,7 +125,7 @@ const WriterList = () => {
                           <div onClick={() => navigate(`/dashboard/writers/create/${item.id}`)}>
                             <FaPen size={22} color="#eab308" />
                           </div>
-                          <div onClick={() => deleteHandler(item.id)}>
+                          <div onClick={() => openHandler(item.id)}>
                             <MdDelete size={25} color="#f43f5e" />
                           </div>
                         </div>
@@ -106,6 +139,16 @@ const WriterList = () => {
         )}
       </div>
     </div>
+
+    {isDeleteModalOpen && (
+      <ConfirmDeleteModal
+      isOpen={isDeleteModalOpen}
+      closeHandler={closeHandler}
+      deleteHandler={deleteHandler}
+      />
+    )}
+ 
+ </>
   );
 };
 
