@@ -9,11 +9,21 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import { useNavigate, useParams } from "react-router-dom";
 import useWriter from "../../../hooks/useWriter";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { createWriterSchema } from "../../../validation/dashboard/writer";
+import { toast } from "react-toastify";
+
 
 const CreateWriter = () => {
-
   const params = useParams();
-  const { register, handleSubmit, setValue } = useForm();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(createWriterSchema),
+  });
 
   const navigate = useNavigate();
 
@@ -21,9 +31,10 @@ const CreateWriter = () => {
 
   const writerState = useWriter();
 
-  const { isCreateSuccess, isUpdateSuccess, isSingleSuccess, singleData } = writerState;
+  const { isCreateSuccess, isUpdateSuccess, isSingleSuccess, singleData, isCreateError ,isUpdateError} =
+    writerState;
 
-  console.log("singleData", singleData)
+  console.log("singleData", singleData);
 
   const inputChangeHandler = (data) => {
     console.log("inputChangeHandler:");
@@ -31,7 +42,6 @@ const CreateWriter = () => {
 
   const submitHandler = (data) => {
     console.log("submit handler :", data);
-
 
     const requestBody = {
       id: uuidv4(),
@@ -45,15 +55,39 @@ const CreateWriter = () => {
       dispatch(updateWriter({ requestBody: requestBody, id: params.id }));
     } else {
       dispatch(createWriter(requestBody));
-      
     }
   };
 
   useEffect(() => {
-    if (isUpdateSuccess) {
+    if (isCreateSuccess) {
+      toast.success("Writer created successfully.", {
+        position: "top-right",
+      });
+
       navigate("/dashboard/writers");
     }
-  }, [isUpdateSuccess]);
+
+    if (isCreateError) {
+      toast.error("Writer was not created.", {
+        position: "top-right",
+      });
+    }
+  }, [isCreateSuccess, isCreateError]);
+
+  useEffect(() => {
+    if (isUpdateSuccess) {
+      toast.success("Writer updated successfully.", {
+        position: "top-right",
+      });
+      navigate("/dashboard/writers");
+    }
+
+    if (isUpdateError) {
+      toast.success("Writer was not updated.", {
+        position: "top-right",
+      });
+    }
+  }, [isUpdateSuccess, isUpdateError]);
 
   useEffect(() => {
     if (isSingleSuccess && singleData) {
@@ -64,13 +98,7 @@ const CreateWriter = () => {
     }
   }, [isSingleSuccess, singleData]);
 
-
-  useEffect(() => {
-    if (isCreateSuccess) {
-      navigate("/Dashboard/writers");
-    }
-  }, [isCreateSuccess]);
-
+  
   return (
     <div className="w-full">
       <div className="bg-slate-100 p-3 rounded-lg">
@@ -94,6 +122,7 @@ const CreateWriter = () => {
                   placeholder="Enter Username"
                   onChange={inputChangeHandler}
                 />
+                <p className=" text-red-600">{errors?.name?.message}</p>
               </div>
             </div>
 
@@ -110,6 +139,7 @@ const CreateWriter = () => {
                   placeholder="Enter Date of Birth"
                   onChange={inputChangeHandler}
                 />
+                <p className=" text-red-600">{errors?.dob?.message}</p>
               </div>
             </div>
 
@@ -124,6 +154,7 @@ const CreateWriter = () => {
                   placeholder="Enter Phone Number"
                   onChange={inputChangeHandler}
                 />
+                <p className=" text-red-600">{errors?.phone?.message}</p>
               </div>
             </div>
 
@@ -138,6 +169,7 @@ const CreateWriter = () => {
                   placeholder="Enter Email"
                   onChange={inputChangeHandler}
                 />
+                <p className=" text-red-600">{errors?.gmail?.message}</p>
               </div>
             </div>
 

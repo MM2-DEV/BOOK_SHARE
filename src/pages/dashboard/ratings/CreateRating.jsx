@@ -10,10 +10,16 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import useRating from "../../../hooks/useRating";
 import { v4 as uuidv4 } from 'uuid';
+import { yupResolver } from "@hookform/resolvers/yup";
+import { createRatingSchema } from "../../../validation/dashboard/rating";
+import { toast } from "react-toastify";
+
 
 
 const CreateRating = () => {
-  const { register, handleSubmit, setValue } = useForm();
+  const { register, handleSubmit, setValue, formState: {errors} } = useForm({
+    resolver: yupResolver(createRatingSchema),
+  });
 
   const navigate = useNavigate();
 
@@ -21,7 +27,7 @@ const CreateRating = () => {
 
   const params = useParams();
 
-  const { isCreateSuccess, isSingleSuccess,  isUpdateSuccess, singleData } = ratingState;
+  const { isCreateSuccess, isSingleSuccess,  isUpdateSuccess, singleData, isCreateError, isUpdateError } = ratingState;
 
   const { isListLoading, listError, listData } = useBookList();
 
@@ -51,15 +57,35 @@ const CreateRating = () => {
 
   useEffect(() => {
     if (isCreateSuccess) {
+      toast.success("Rating created successfully.", {
+        position: "top-right",
+      });
+
       navigate("/dashboard/ratings");
     }
-  }, [isCreateSuccess]);
 
-  useEffect(()=>{
-    if(isUpdateSuccess){
-      navigate("/dashboard/ratings")
+    if (isCreateError) {
+      toast.error("Rating was not created.", {
+        position: "top-right",
+      });
     }
-  },[isUpdateSuccess])
+  }, [isCreateSuccess, isCreateError]);
+
+  useEffect(() => {
+    if (isUpdateSuccess) {
+      toast.success("Rating updated successfully.", {
+        position: "top-right",
+      });
+      navigate("/dashboard/ratings");
+    }
+
+    if (isUpdateError) {
+      toast.success("Rating was not updated.", {
+        position: "top-right",
+      });
+    }
+  }, [isUpdateSuccess, isUpdateError]);
+
 
   useEffect(() => {
     if (isSingleSuccess && singleData) {
@@ -93,6 +119,8 @@ const CreateRating = () => {
                       })
                     : ""}
                 </select>
+                <p className=" text-red-600">{errors?.book?.message}</p>
+
               </div>
             </div>
 
@@ -109,6 +137,8 @@ const CreateRating = () => {
                   placeholder="Enter Rating Value "
                   onChange={inputChangeHandler}
                 />
+                <p className=" text-red-600">{errors?.ratingValue?.message}</p>
+
               </div>
             </div>
 
@@ -123,6 +153,8 @@ const CreateRating = () => {
                   placeholder="Enter Date"
                   onChange={inputChangeHandler}
                 />
+                <p className=" text-red-600">{errors?.date?.message}</p>
+
               </div>
             </div>
 

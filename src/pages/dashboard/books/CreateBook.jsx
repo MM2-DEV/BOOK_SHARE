@@ -13,6 +13,10 @@ import {
   updateBook,
 } from "../../../store/actions/book/bookActionHandler";
 import useBook from "../../../hooks/useBook";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { createBookSchema } from "../../../validation/dashboard/book";
+import { toast } from "react-toastify";
+
 
 const CreateBook = () => {
   const {
@@ -33,7 +37,9 @@ const CreateBook = () => {
 
   console.log("isDonateOrBuy", isDonateOrBuy);
 
-  const { register, handleSubmit, setValue } = useForm();
+  const { register, handleSubmit, setValue, formState: {errors} } = useForm({
+    resolver: yupResolver(createBookSchema),
+  });
 
   const dispatch = useDispatch();
 
@@ -43,7 +49,7 @@ const CreateBook = () => {
 
   const bookState = useBook();
 
-  const { isCreateSuccess, isSingleSuccess, isUpdateSuccess, singleData } =
+  const { isCreateSuccess, isSingleSuccess, isUpdateSuccess, singleData, isCreateError, isUpdateError } =
     bookState;
 
   const inputChangeHandler = (event) => {
@@ -81,10 +87,35 @@ const CreateBook = () => {
   };
 
   useEffect(() => {
-    if (isUpdateSuccess) {
+    if (isCreateSuccess) {
+      toast.success("Book created successfully.", {
+        position: "top-right",
+      });
+
       navigate("/dashboard/books");
     }
-  }, [isUpdateSuccess]);
+
+    if (isCreateError) {
+      toast.error("Book was not created.", {
+        position: "top-right",
+      });
+    }
+  }, [isCreateSuccess, isCreateError]);
+
+  useEffect(() => {
+    if (isUpdateSuccess) {
+      toast.success("Book updated successfully.", {
+        position: "top-right",
+      });
+      navigate("/dashboard/books");
+    }
+
+    if (isUpdateError) {
+      toast.success("Book was not updated.", {
+        position: "top-right",
+      });
+    }
+  }, [isUpdateSuccess, isUpdateError]);
 
   useEffect(() => {
     if (isSingleSuccess && singleData) {
@@ -101,11 +132,7 @@ const CreateBook = () => {
     }
   }, [isSingleSuccess, singleData]);
 
-  useEffect(() => {
-    if (isCreateSuccess) {
-      navigate("/dashboard/books");
-    }
-  }, [isCreateSuccess]);
+
 
   return (
     <div className="w-full">
@@ -130,6 +157,8 @@ const CreateBook = () => {
                   placeholder="Enter Name in English"
                   onChange={inputChangeHandler}
                 />
+                <p className=" text-red-600">{errors?.nameEn?.message}</p>
+
               </div>
             </div>
 
@@ -146,6 +175,8 @@ const CreateBook = () => {
                   placeholder="Enter Name in Bangla"
                   onChange={inputChangeHandler}
                 />
+                <p className=" text-red-600">{errors?.nameBn?.message}</p>
+
               </div>
             </div>
 
@@ -176,6 +207,8 @@ const CreateBook = () => {
                   placeholder="Enter Quantity"
                   onChange={inputChangeHandler}
                 />
+                <p className=" text-red-600">{errors?.totalCount?.message}</p>
+
               </div>
             </div>
 
@@ -190,6 +223,8 @@ const CreateBook = () => {
                   placeholder="Enter Edition "
                   onChange={inputChangeHandler}
                 />
+                <p className=" text-red-600">{errors?.edition?.message}</p>
+
               </div>
             </div>
 
@@ -207,6 +242,8 @@ const CreateBook = () => {
                       })
                     : ""}
                 </select>
+                <p className=" text-red-600">{errors?.genre?.message}</p>
+
               </div>
             </div>
 
@@ -224,6 +261,8 @@ const CreateBook = () => {
                       })
                     : ""}
                 </select>
+                <p className=" text-red-600">{errors?.writer?.message}</p>
+
               </div>
             </div>
 
@@ -238,6 +277,8 @@ const CreateBook = () => {
                   {...register("isDonateOrBuy")}
                   onChange={(event) => inputChangeHandler(event)}
                 />
+                <p className=" text-red-600">{errors?.isDonateOrBuy?.message}</p>
+                
               </div>
             </div>
 
@@ -258,6 +299,8 @@ const CreateBook = () => {
                           })
                         : ""}
                     </select>
+                <p className=" text-red-600">{errors?.donor?.message}</p>
+
                   </div>
                 </div>
                 <div className="flex flex-col md:flex-row text-sm">
@@ -272,6 +315,8 @@ const CreateBook = () => {
                       className="w-full p-2 border rounded-md focus:border-green-900 focus:outline-none placeholder:text-sm"
                       onChange={inputChangeHandler}
                     />
+                <p className=" text-red-600">{errors?.donateDate?.message}</p>
+
                   </div>
                 </div>
               </>
@@ -288,6 +333,8 @@ const CreateBook = () => {
                       placeholder="Enter Price "
                       onChange={inputChangeHandler}
                     />
+                <p className=" text-red-600">{errors?.price?.message}</p>
+
                   </div>
                 </div>
 
@@ -303,6 +350,8 @@ const CreateBook = () => {
                       className="w-full p-2 border rounded-md focus:border-green-900 focus:outline-none placeholder:text-sm"
                       onChange={inputChangeHandler}
                     />
+                <p className=" text-red-600">{errors?.purchaseDate?.message}</p>
+
                   </div>
                 </div>
               </>

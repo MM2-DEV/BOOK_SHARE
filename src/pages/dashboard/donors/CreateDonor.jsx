@@ -9,9 +9,19 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import { useNavigate, useParams } from "react-router-dom";
 import useDonor from "../../../hooks/useDonor";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { createDonorSchema } from "../../../validation/dashboard/donor";
+import { toast } from "react-toastify";
 
 const CreateDonor = () => {
-  const { register, handleSubmit, setValue } = useForm();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(createDonorSchema),
+  });
 
   const navigate = useNavigate();
 
@@ -21,8 +31,14 @@ const CreateDonor = () => {
 
   const dispatch = useDispatch();
 
-  const { isCreateSuccess, isSingleSuccess, singleData, isUpdateSuccess } =
-    donorState;
+  const {
+    isCreateSuccess,
+    isSingleSuccess,
+    singleData,
+    isUpdateSuccess,
+    isCreateError,
+    isUpdateError,
+  } = donorState;
 
   const inputChangeHandler = (data) => {
     console.log("inputChangeHandler:");
@@ -47,10 +63,35 @@ const CreateDonor = () => {
   };
 
   useEffect(() => {
-    if (isUpdateSuccess) {
+    if (isCreateSuccess) {
+      toast.success("Donor created successfully.", {
+        position: "top-right",
+      });
+
       navigate("/dashboard/donors");
     }
-  }, [isUpdateSuccess]);
+
+    if (isCreateError) {
+      toast.error("Donor was not created.", {
+        position: "top-right",
+      });
+    }
+  }, [isCreateSuccess, isCreateError]);
+
+  useEffect(() => {
+    if (isUpdateSuccess) {
+      toast.success("Donor updated successfully.", {
+        position: "top-right",
+      });
+      navigate("/dashboard/donors");
+    }
+
+    if (isUpdateError) {
+      toast.success("Donor was not updated.", {
+        position: "top-right",
+      });
+    }
+  }, [isUpdateSuccess, isUpdateError]);
 
   useEffect(() => {
     if (isSingleSuccess && singleData) {
@@ -60,12 +101,6 @@ const CreateDonor = () => {
       setValue("gmail", singleData.gmail);
     }
   }, [isSingleSuccess, singleData]);
-
-  useEffect(() => {
-    if (isCreateSuccess) {
-      navigate("/Dashboard/donors");
-    }
-  }, [isCreateSuccess]);
 
   return (
     <div className="w-full">
@@ -90,6 +125,7 @@ const CreateDonor = () => {
                   placeholder="Enter Username"
                   onChange={inputChangeHandler}
                 />
+                <p className=" text-red-600">{errors?.name?.message}</p>
               </div>
             </div>
 
@@ -106,6 +142,7 @@ const CreateDonor = () => {
                   placeholder="Enter Date of Birth"
                   onChange={inputChangeHandler}
                 />
+                <p className=" text-red-600">{errors?.dob?.message}</p>
               </div>
             </div>
 
@@ -120,6 +157,7 @@ const CreateDonor = () => {
                   placeholder="Enter Phone Number"
                   onChange={inputChangeHandler}
                 />
+                <p className=" text-red-600">{errors?.phone?.message}</p>
               </div>
             </div>
 
@@ -134,6 +172,7 @@ const CreateDonor = () => {
                   placeholder="Enter Email"
                   onChange={inputChangeHandler}
                 />
+                <p className=" text-red-600">{errors?.gmail?.message}</p>
               </div>
             </div>
 
