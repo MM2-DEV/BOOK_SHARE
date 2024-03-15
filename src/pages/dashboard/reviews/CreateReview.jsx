@@ -10,11 +10,16 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import { useNavigate, useParams } from "react-router-dom";
 import useReview from "../../../hooks/useReview";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { createReviewSchema } from "../../../validation/dashboard/review";
+
 
 const CreateReview = () => {
   const params = useParams();
 
-  const { register, handleSubmit, setValue } = useForm();
+  const { register, handleSubmit, setValue, formState:{errors} } = useForm({
+    resolver: yupResolver(createReviewSchema),
+  });
 
   const navigate = useNavigate();
 
@@ -93,6 +98,8 @@ const CreateReview = () => {
                       })
                     : ""}
                 </select>
+                <p className=" text-red-600">{errors?.book?.message}</p>
+
               </div>
             </div>
 
@@ -108,6 +115,8 @@ const CreateReview = () => {
                   className="w-full p-2 border rounded-md focus:border-green-900 focus:outline-none placeholder:text-sm"
                   placeholder="Enter Review"
                 ></textarea>
+                <p className=" text-red-600">{errors?.reviewContent?.message}</p>
+
               </div>
             </div>
 
@@ -122,6 +131,8 @@ const CreateReview = () => {
                   placeholder="Enter Date"
                   onChange={inputChangeHandler}
                 />
+                <p className=" text-red-600">{errors?.date?.message}</p>
+
               </div>
             </div>
 

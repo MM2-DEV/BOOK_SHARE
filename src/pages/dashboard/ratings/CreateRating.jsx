@@ -10,10 +10,15 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import useRating from "../../../hooks/useRating";
 import { v4 as uuidv4 } from 'uuid';
+import { yupResolver } from "@hookform/resolvers/yup";
+import { createRatingSchema } from "../../../validation/dashboard/rating";
+
 
 
 const CreateRating = () => {
-  const { register, handleSubmit, setValue } = useForm();
+  const { register, handleSubmit, setValue, formState: {errors} } = useForm({
+    resolver: yupResolver(createRatingSchema),
+  });
 
   const navigate = useNavigate();
 
@@ -93,6 +98,8 @@ const CreateRating = () => {
                       })
                     : ""}
                 </select>
+                <p className=" text-red-600">{errors?.book?.message}</p>
+
               </div>
             </div>
 
@@ -109,6 +116,8 @@ const CreateRating = () => {
                   placeholder="Enter Rating Value "
                   onChange={inputChangeHandler}
                 />
+                <p className=" text-red-600">{errors?.ratingValue?.message}</p>
+
               </div>
             </div>
 
@@ -123,6 +132,8 @@ const CreateRating = () => {
                   placeholder="Enter Date"
                   onChange={inputChangeHandler}
                 />
+                <p className=" text-red-600">{errors?.date?.message}</p>
+
               </div>
             </div>
 
