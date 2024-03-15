@@ -11,6 +11,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import useWriter from "../../../hooks/useWriter";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createWriterSchema } from "../../../validation/dashboard/writer";
+import { toast } from "react-toastify";
+
 
 const CreateWriter = () => {
   const params = useParams();
@@ -29,7 +31,7 @@ const CreateWriter = () => {
 
   const writerState = useWriter();
 
-  const { isCreateSuccess, isUpdateSuccess, isSingleSuccess, singleData } =
+  const { isCreateSuccess, isUpdateSuccess, isSingleSuccess, singleData, isCreateError ,isUpdateError} =
     writerState;
 
   console.log("singleData", singleData);
@@ -58,9 +60,18 @@ const CreateWriter = () => {
 
   useEffect(() => {
     if (isUpdateSuccess) {
+      toast.success("Writer updated successfully", {
+        position: "top-right",
+      });
       navigate("/dashboard/writers");
     }
-  }, [isUpdateSuccess]);
+
+    if (isUpdateError) {
+      toast.success("Writer updated successfully", {
+        position: "top-right",
+      });
+    }
+  }, [isUpdateSuccess, isUpdateError]);
 
   useEffect(() => {
     if (isSingleSuccess && singleData) {
@@ -73,10 +84,19 @@ const CreateWriter = () => {
 
   useEffect(() => {
     if (isCreateSuccess) {
-      navigate("/Dashboard/writers");
-    }
-  }, [isCreateSuccess]);
+      toast.success("Writer created successfully.", {
+        position: "top-right",
+      });
 
+      navigate("/dashboard/writers");
+    }
+
+    if (isCreateError) {
+      toast.error("Writer was not created.", {
+        position: "top-right",
+      });
+    }
+  }, [isCreateSuccess, isCreateError]);
   return (
     <div className="w-full">
       <div className="bg-slate-100 p-3 rounded-lg">
