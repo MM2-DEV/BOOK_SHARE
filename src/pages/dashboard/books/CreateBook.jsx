@@ -15,6 +15,7 @@ import {
 import useBook from "../../../hooks/useBook";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createBookSchema } from "../../../validation/dashboard/book";
+import { toast } from "react-toastify";
 
 
 const CreateBook = () => {
@@ -48,7 +49,7 @@ const CreateBook = () => {
 
   const bookState = useBook();
 
-  const { isCreateSuccess, isSingleSuccess, isUpdateSuccess, singleData } =
+  const { isCreateSuccess, isSingleSuccess, isUpdateSuccess, singleData, isCreateError, isUpdateError } =
     bookState;
 
   const inputChangeHandler = (event) => {
@@ -86,10 +87,35 @@ const CreateBook = () => {
   };
 
   useEffect(() => {
-    if (isUpdateSuccess) {
+    if (isCreateSuccess) {
+      toast.success("Book created successfully.", {
+        position: "top-right",
+      });
+
       navigate("/dashboard/books");
     }
-  }, [isUpdateSuccess]);
+
+    if (isCreateError) {
+      toast.error("Book was not created.", {
+        position: "top-right",
+      });
+    }
+  }, [isCreateSuccess, isCreateError]);
+
+  useEffect(() => {
+    if (isUpdateSuccess) {
+      toast.success("Book updated successfully.", {
+        position: "top-right",
+      });
+      navigate("/dashboard/books");
+    }
+
+    if (isUpdateError) {
+      toast.success("Book was not updated.", {
+        position: "top-right",
+      });
+    }
+  }, [isUpdateSuccess, isUpdateError]);
 
   useEffect(() => {
     if (isSingleSuccess && singleData) {
@@ -106,11 +132,7 @@ const CreateBook = () => {
     }
   }, [isSingleSuccess, singleData]);
 
-  useEffect(() => {
-    if (isCreateSuccess) {
-      navigate("/dashboard/books");
-    }
-  }, [isCreateSuccess]);
+
 
   return (
     <div className="w-full">
