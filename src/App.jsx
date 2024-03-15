@@ -176,7 +176,7 @@ const routes1 = createBrowserRouter([
       },
 
       {
-        path: "readers",
+        path: "readerLoves",
         children: [
           {
             index: true,

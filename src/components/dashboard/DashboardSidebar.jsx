@@ -185,11 +185,11 @@ const DashboardSidebar = () => {
               <Disclosure.Panel className="px-3 py-2 text-sm text-purple-900">
                 <ul >
                   <li className="mb-2">
-                    <Link to={"/dashboard/readers"}>All Readers</Link>
+                    <Link to={"/dashboard/readerLoves"}>All Readers Love</Link>
                   </li>
 
                   <li className="mb-2">
-                    <Link to={"/dashboard/readers/create"}>Add Readers</Link>
+                    <Link to={"/dashboard/readerLoves/create"}>Add Reader Loves</Link>
                   </li>
                 </ul>
               </Disclosure.Panel>

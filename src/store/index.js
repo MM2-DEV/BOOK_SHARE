@@ -6,6 +6,8 @@ import donorReducer from "./reducers/donorReducer";
 import genreReducer from "./reducers/genreReducer";
 import ratingReducer from "./reducers/ratingReducer";
 import reviewReducer from "./reducers/reviewReducer";
+import requestReducer from "./reducers/requestReducer";
+import readerLovesReducer from "./reducers/readerLovesReducer";
 
 const store = configureStore({
   reducer: combineReducers({
@@ -15,7 +17,9 @@ const store = configureStore({
     donors: donorReducer,
     genres: genreReducer,
     ratings: ratingReducer,
-    reviews: reviewReducer
+    reviews: reviewReducer,
+    requests: requestReducer,
+    readerLoves: readerLovesReducer
   }),
   devTools: true,
 });
