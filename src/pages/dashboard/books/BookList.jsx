@@ -141,16 +141,16 @@ const BookList = () => {
                           {item.edition}
                         </td>
                         <td className="border border-green-600 px-[20px] py-[5px]">
-                          Genre
+                          {item.genre.name}
                         </td>
                         <td className="border border-green-600 px-[20px] py-[5px]">
-                          Writer
+                          {item.writer.name}
                         </td>
                         <td className="border border-green-600 px-[20px] py-[5px]">
                           Donate or Buy
                         </td>
                         <td className="border border-green-600 px-[20px] py-[5px]">
-                          Donor Name
+                          {item.bookDonor.name}
                         </td>
                         <td className="border border-green-600 px-[20px] py-[5px]">
                           {item.donorDate}
