@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const StoryBooks = () => {
+  const navigate = useNavigate();
+
   const [storyBooks, setStoryBooks] = useState([
     {
       writer: "Munna",
@@ -94,16 +97,26 @@ const StoryBooks = () => {
           >
             <div className="w-full border rounded-md overflow-hidden">
               <div className="w-full h-[300px] bg-slate-100">
-                <img src={item.src} alt={item.name} className="w-full h-full object-fill" />
+                <img
+                  src={item.src}
+                  alt={item.name}
+                  className="w-full h-full object-fill"
+                />
               </div>
               <div className="w-full p-3 mt-1">
                 <h2 className="text-xl">Title: {item.name}</h2>
                 <h6 className="text-md">Genre: {item.genre}</h6>
                 <h6 className="text-md">Writer: {item.writer}</h6>
                 <div className="flex mt-5 text-white">
-                  <button className="grow mr-2 p-2 rounded-lg border border-teal-500 bg-teal-500">
+                  <button
+                    className="grow mr-2 p-2 rounded-lg border border-teal-500 bg-teal-500"
+                    onClick={() => {
+                      navigate("/book-details");
+                    }}
+                  >
                     Details
                   </button>
+
                   <button className="grow ml-2 p-2 rounded-lg border border-red-400 bg-red-400">
                     Borrow
                   </button>
