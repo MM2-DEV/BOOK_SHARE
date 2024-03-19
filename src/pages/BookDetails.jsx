@@ -43,7 +43,7 @@ const BookDetails = () => {
                 vitae magni, eligendi soluta? Culpa a veniam, repellat
               </p>
 
-              <div className="mt-8 bg-slate-300 p-4 rounded-md">
+              <div className="mt-8 bg-slate-100 p-4 rounded-md">
                 <div>
                   {[
                     { user: "munna", review: "nice book" },
