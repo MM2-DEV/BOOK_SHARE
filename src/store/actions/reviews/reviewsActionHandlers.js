@@ -15,22 +15,18 @@ export const getReview = createAsyncThunk("reviews/getReview", async (id) => {
 
   const url = `https://book-share-json-server.onrender.com/reviews/${id}?_expand=book&_expand=user`;
 
-  const res = await axios.get(url);
-  console.log("res:", res)
+    const res = await axios.get(url);
 
-  return res.data;
-});
+    return res.data;
+  }
+);
 
 export const createReview = createAsyncThunk(
   "reviews/createReview",
   async (requestBody) => {
-    console.log("request body:", requestBody);
-
     const url = "https://book-share-json-server.onrender.com/reviews";
 
     const res = await axios.post(url, requestBody);
-
-    console.log("res:",res)
 
     return res.data;
   }
@@ -53,7 +49,8 @@ export const updateReview = createAsyncThunk(
 export const deleteReview = createAsyncThunk("reviews/deleteReview", async (id) => {
   const url = `https://book-share-json-server.onrender.com/reviews/${id}`;
 
-  const res = await axios.delete(url);
+    const res = await axios.delete(url);
 
-  return res.data;
-});
+    return res.data;
+  }
+);
