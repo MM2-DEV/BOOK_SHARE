@@ -24,6 +24,7 @@ import CreateReview from "./pages/dashboard/reviews/CreateReview";
 import ReaderList from "./pages/dashboard/readers/ReaderList";
 import CreateReader from "./pages/dashboard/readers/CreateReader";
 import RequestList from "./pages/dashboard/requests/RequestList";
+import BookDetails from "./pages/BookDetails";
 
 const routes1 = createBrowserRouter([
   {
@@ -37,6 +38,13 @@ const routes1 = createBrowserRouter([
     element: <SignUpPage />,
     children: [],
   },
+
+  {
+    path: "/bookDetails",
+    element: <BookDetails />,
+    children: [],
+  },
+
 
   {
     path: "/",
