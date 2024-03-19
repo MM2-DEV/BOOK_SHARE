@@ -58,7 +58,7 @@ const routes1 = createBrowserRouter([
         element: <ContactPage />,
       },
       {
-        path: "/bookDetails",
+        path: "/book-details",
         element: <BookDetails />,
       },
     ],
