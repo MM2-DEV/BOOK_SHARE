@@ -43,7 +43,6 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     // get review data
     builder.addCase(getReviewList.pending, (state, action) => {
-      console.log("action pending:", action);
       state.isListLoading = true;
       state.isListError = false;
       state.isListSuccess = false;
@@ -73,9 +72,8 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getReviewList.rejected, (state, action) => {
-      console.log("action rejected:", action);
 
-      const { type, payload, error } = action;
+      const { error } = action;
 
       state.isListLoading = false;
       state.isListError = true;
@@ -85,7 +83,6 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getReviewList.fulfilled, (state, action) => {
-      console.log("action fulfilled:", action);
 
       const { payload } = action;
 

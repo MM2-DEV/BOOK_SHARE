@@ -1,4 +1,16 @@
 .container {
-  max-width: 1020px;
+  max-width: 1024px;
   margin: 0 auto;
+}
+
+.swiper-button-prev {
+  color: #ffffff !important;
+}
+
+.swiper-button-next {
+  color: #ffffff !important;
+}
+
+.quotes-pagination .swiper-pagination {
+  bottom: 0px;
 }
