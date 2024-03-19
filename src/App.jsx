@@ -40,13 +40,6 @@ const routes1 = createBrowserRouter([
   },
 
   {
-    path: "/bookDetails",
-    element: <BookDetails />,
-    children: [],
-  },
-
-
-  {
     path: "/",
     element: <MainLayout />,
     children: [
@@ -63,6 +56,10 @@ const routes1 = createBrowserRouter([
       {
         path: "contact",
         element: <ContactPage />,
+      },
+      {
+        path: "/bookDetails",
+        element: <BookDetails />,
       },
     ],
   },
@@ -204,7 +201,6 @@ const routes1 = createBrowserRouter([
             index: true,
             element: <RequestList />,
           },
-        
         ],
       },
     ],
