@@ -9,6 +9,7 @@ import reviewReducer from "./reducers/reviewReducer";
 import requestReducer from "./reducers/requestReducer";
 import readerLovesReducer from "./reducers/readerLovesReducer";
 import allBooksReducer from "./reducers/allBooksReducer";
+import authReducer from "./reducers/authReducer";
 
 const store = configureStore({
   reducer: combineReducers({
@@ -22,6 +23,7 @@ const store = configureStore({
     requests: requestReducer,
     readerLoves: readerLovesReducer,
     allBooks: allBooksReducer,
+    authentication: authReducer
   }),
   devTools: true,
 });
