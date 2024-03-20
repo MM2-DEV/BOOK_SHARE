@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useStoryBook from "../../../hooks/useStoryBook";
 
 const StoryBooks = () => {
   const navigate = useNavigate();
@@ -86,6 +87,11 @@ const StoryBooks = () => {
     },
   ]);
 
+  const { isListLoading, listError, listData } = useStoryBook();
+
+  // const storyBookState = useStoryBook();
+  // const { isListLoading, listError, listData } = storyBookState;
+
   return (
     <div className="rounded-md my-[20px] bg-slate-100 p-[20px]">
       <h2 className="text-2xl">Story Books</h2>
@@ -126,6 +132,13 @@ const StoryBooks = () => {
           </div>
         ))}
       </div>
+
+      <div className="bg-white p-2 rounded-md mt-[20px] text-center">
+        <button className="grow ml-2 p-2 rounded-lg border border-green-400 bg-green-400 text-white">
+          Load More
+        </button>
+      </div>
+      
     </div>
   );
 };

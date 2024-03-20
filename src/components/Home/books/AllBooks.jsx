@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import useAllBook from "../../../hooks/useAllBook";
 
 const AllBooks = () => {
   const [allBooks, setAllBooks] = useState([
@@ -82,6 +83,9 @@ const AllBooks = () => {
       src: "https://static-01.daraz.com.bd/p/44f6ebd30511965d0ea34e057241b6eb.jpg",
     },
   ]);
+
+  const { isListLoading, listError, listData } = useAllBook();
+
   return (
     <div className="rounded-md my-[20px] bg-slate-100 p-[20px]">
       <h2 className="text-2xl">All Books</h2>
@@ -116,6 +120,13 @@ const AllBooks = () => {
           </div>
         ))}
       </div>
+
+      <div className="bg-white p-2 rounded-md mt-[20px] text-center">
+        <button className="grow ml-2 p-2 rounded-lg border border-green-400 bg-green-400 text-white">
+          Load More
+        </button>
+      </div>
+
     </div>
   );
 };
