@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useStoryBook from "../../../hooks/useStoryBook";
 
 const StoryBooks = () => {
   const navigate = useNavigate();
@@ -85,6 +86,11 @@ const StoryBooks = () => {
       src: "https://static-01.daraz.com.bd/p/44f6ebd30511965d0ea34e057241b6eb.jpg",
     },
   ]);
+
+  const { isListLoading, listError, listData } = useStoryBook();
+
+  // const storyBookState = useStoryBook();
+  // const { isListLoading, listError, listData } = storyBookState;
 
   return (
     <div className="rounded-md my-[20px] bg-slate-100 p-[20px]">

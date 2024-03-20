@@ -8,6 +8,7 @@ import ratingReducer from "./reducers/ratingReducer";
 import reviewReducer from "./reducers/reviewReducer";
 import requestReducer from "./reducers/requestReducer";
 import readerLovesReducer from "./reducers/readerLovesReducer";
+import allBooksReducer from "./reducers/allBooksReducer";
 
 const store = configureStore({
   reducer: combineReducers({
@@ -19,7 +20,8 @@ const store = configureStore({
     ratings: ratingReducer,
     reviews: reviewReducer,
     requests: requestReducer,
-    readerLoves: readerLovesReducer
+    readerLoves: readerLovesReducer,
+    allBooks: allBooksReducer,
   }),
   devTools: true,
 });
