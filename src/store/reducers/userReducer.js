@@ -35,16 +35,18 @@ const initialState = {
 };
 
 const userSlice = createSlice({
-  name: "user",
+  name: "users",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     // get user data
     builder.addCase(getUserList.pending, (state, action) => {
       console.log("action pending:", action);
+
       state.isListLoading = true;
       state.isListError = false;
-      (state.isListSuccess = false), (state.listData = null);
+      state.isListSuccess = false;
+       state.listData = null;
       state.listError = null;
     });
 
@@ -68,7 +70,7 @@ const userSlice = createSlice({
       state.isListLoading = false;
       state.isListError = false;
       state.isListSuccess = true;
-      state.listData = payload?.data || [];
+      state.listData = payload || [];
       state.listError = null;
     });
 
