@@ -17,7 +17,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { createBookSchema } from "../../../validation/dashboard/book";
 import { toast } from "react-toastify";
 
-
 const CreateBook = () => {
   const {
     isListLoading: isGenreListLoading,
@@ -37,7 +36,12 @@ const CreateBook = () => {
 
   console.log("isDonateOrBuy", isDonateOrBuy);
 
-  const { register, handleSubmit, setValue, formState: {errors} } = useForm({
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(createBookSchema),
   });
 
@@ -48,9 +52,16 @@ const CreateBook = () => {
   const params = useParams();
 
   const bookState = useBook();
+  console.log("bookState", bookState);
 
-  const { isCreateSuccess, isSingleSuccess, isUpdateSuccess, singleData, isCreateError, isUpdateError } =
-    bookState;
+  const {
+    isCreateSuccess,
+    isSingleSuccess,
+    isUpdateSuccess,
+    singleData,
+    isCreateError,
+    isUpdateError,
+  } = bookState;
 
   const inputChangeHandler = (event) => {
     console.log("inputChangeHandler:", event.target.checked);
@@ -67,16 +78,20 @@ const CreateBook = () => {
       id: uuidv4(),
       nameEn: data.nameEn,
       nameBn: data.nameBn,
+      image: data.image,
       isDonateOrBuy: data.isDonateOrBuy,
       totalAvailable: data.totalAvailable,
       totalCount: data.totalCount,
+      totalReaders: [],
       edition: data.edition,
-      genreId: data.genreId,
-      writerId: data.writerId,
-      bookDonorId: data.writerId,
+      genreId: Number(data.genreId) || null,
+      writerId: Number(data.writerId) || null,
+      bookDonorId: Number(data.writerId) || null,
       donateDate: data.donateDate,
       purchaseDate: data.purchaseDate,
       price: data.price,
+      isBorrowRequest: false,
+      isShared: false,
     };
 
     if (params.id) {
@@ -132,8 +147,6 @@ const CreateBook = () => {
     }
   }, [isSingleSuccess, singleData]);
 
-
-
   return (
     <div className="w-full">
       <div className="bg-slate-100 p-3 rounded-lg">
@@ -158,7 +171,6 @@ const CreateBook = () => {
                   onChange={inputChangeHandler}
                 />
                 <p className=" text-red-600">{errors?.nameEn?.message}</p>
-
               </div>
             </div>
 
@@ -176,7 +188,6 @@ const CreateBook = () => {
                   onChange={inputChangeHandler}
                 />
                 <p className=" text-red-600">{errors?.nameBn?.message}</p>
-
               </div>
             </div>
 
@@ -186,11 +197,11 @@ const CreateBook = () => {
               </label>
               <div className="p-1 basis-full md:basis-3/3">
                 <input
-                  type="file"
+                  type="url"
                   name="image"
                   {...register("image")}
                   className="w-full p-2 border rounded-md focus:border-green-900 focus:outline-none placeholder:text-sm"
-                  placeholder="Enter Image"
+                  placeholder="Enter Valid Image Url"
                   onChange={inputChangeHandler}
                 />
               </div>
@@ -208,7 +219,6 @@ const CreateBook = () => {
                   onChange={inputChangeHandler}
                 />
                 <p className=" text-red-600">{errors?.totalCount?.message}</p>
-
               </div>
             </div>
 
@@ -224,7 +234,6 @@ const CreateBook = () => {
                   onChange={inputChangeHandler}
                 />
                 <p className=" text-red-600">{errors?.edition?.message}</p>
-
               </div>
             </div>
 
@@ -243,7 +252,6 @@ const CreateBook = () => {
                     : ""}
                 </select>
                 <p className=" text-red-600">{errors?.genre?.message}</p>
-
               </div>
             </div>
 
@@ -262,7 +270,6 @@ const CreateBook = () => {
                     : ""}
                 </select>
                 <p className=" text-red-600">{errors?.writer?.message}</p>
-
               </div>
             </div>
 
@@ -277,8 +284,9 @@ const CreateBook = () => {
                   {...register("isDonateOrBuy")}
                   onChange={(event) => inputChangeHandler(event)}
                 />
-                <p className=" text-red-600">{errors?.isDonateOrBuy?.message}</p>
-                
+                <p className=" text-red-600">
+                  {errors?.isDonateOrBuy?.message}
+                </p>
               </div>
             </div>
 
@@ -299,8 +307,7 @@ const CreateBook = () => {
                           })
                         : ""}
                     </select>
-                <p className=" text-red-600">{errors?.donor?.message}</p>
-
+                    <p className=" text-red-600">{errors?.donor?.message}</p>
                   </div>
                 </div>
                 <div className="flex flex-col md:flex-row text-sm">
@@ -315,8 +322,9 @@ const CreateBook = () => {
                       className="w-full p-2 border rounded-md focus:border-green-900 focus:outline-none placeholder:text-sm"
                       onChange={inputChangeHandler}
                     />
-                <p className=" text-red-600">{errors?.donateDate?.message}</p>
-
+                    <p className=" text-red-600">
+                      {errors?.donateDate?.message}
+                    </p>
                   </div>
                 </div>
               </>
@@ -333,8 +341,7 @@ const CreateBook = () => {
                       placeholder="Enter Price "
                       onChange={inputChangeHandler}
                     />
-                <p className=" text-red-600">{errors?.price?.message}</p>
-
+                    <p className=" text-red-600">{errors?.price?.message}</p>
                   </div>
                 </div>
 
@@ -350,8 +357,9 @@ const CreateBook = () => {
                       className="w-full p-2 border rounded-md focus:border-green-900 focus:outline-none placeholder:text-sm"
                       onChange={inputChangeHandler}
                     />
-                <p className=" text-red-600">{errors?.purchaseDate?.message}</p>
-
+                    <p className=" text-red-600">
+                      {errors?.purchaseDate?.message}
+                    </p>
                   </div>
                 </div>
               </>

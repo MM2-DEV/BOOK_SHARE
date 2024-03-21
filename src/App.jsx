@@ -176,21 +176,18 @@ const routes1 = createBrowserRouter([
       },
 
       {
-        path: "readerLoves",
+        path: "reader-loves",
         children: [
           {
             index: true,
             element: <ReaderList />,
           },
-          {
-            path: "create",
-            element: <CreateReader />,
-          },
+       
         ],
       },
 
       {
-        path: "borrowRequests",
+        path: "borrow-requests",
         children: [
           {
             index: true,

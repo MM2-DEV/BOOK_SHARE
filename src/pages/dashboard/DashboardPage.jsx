@@ -16,7 +16,7 @@ const DashboardPage = () => {
               <button
                 className=" mr-2 py-2 px-4 rounded-lg border border-teal-500 bg-teal-500"
                 onClick={() => {
-                  navigate("/book-details");
+                  navigate("#");
                 }}
               >
                 View
@@ -32,7 +32,7 @@ const DashboardPage = () => {
               <button
                 className=" mr-2 py-2 px-4 rounded-lg border border-teal-500 bg-teal-500"
                 onClick={() => {
-                  navigate("/book-details");
+                  navigate("/dashboard/writers");
                 }}
               >
                 View
@@ -48,7 +48,7 @@ const DashboardPage = () => {
               <button
                 className=" mr-2 py-2 px-4 rounded-lg border border-teal-500 bg-teal-500"
                 onClick={() => {
-                  navigate("/book-details");
+                  navigate("/dashboard/books");
                 }}
               >
                 View
@@ -64,7 +64,7 @@ const DashboardPage = () => {
               <button
                 className=" mr-2 py-2 px-4 rounded-lg border border-teal-500 bg-teal-500"
                 onClick={() => {
-                  navigate("/book-details");
+                  navigate("/dashboard/genres");
                 }}
               >
                 View
@@ -80,7 +80,7 @@ const DashboardPage = () => {
               <button
                 className=" mr-2 py-2 px-4 rounded-lg border border-teal-500 bg-teal-500"
                 onClick={() => {
-                  navigate("/book-details");
+                  navigate("/dashboard/donors");
                 }}
               >
                 View
@@ -96,7 +96,7 @@ const DashboardPage = () => {
               <button
                 className=" mr-2 py-2 px-4 rounded-lg border border-teal-500 bg-teal-500"
                 onClick={() => {
-                  navigate("/book-details");
+                  navigate("/dashboard/borrow-requests");
                 }}
               >
                 View
