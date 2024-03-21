@@ -1,5 +1,6 @@
 import React from "react";
 import { FaRegPaperPlane } from "react-icons/fa";
+import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 
 const BookDetails = () => {
   return (
@@ -32,9 +33,18 @@ const BookDetails = () => {
 
           <div className="basis-full md:basis-3/4 p-4 rounded-md">
             <div className="bg-white p-4 rounded-md">
-              <h1 className="font-bold text-2xl">
-                Title: {"Hajar Bochor Dhore."}
-              </h1>
+              <div className="flex items-center">
+                <h1 className="flex-grow  font-bold text-2xl pr-5">
+                  Title: {"Hajar Bochor Dhore."}
+                </h1>
+                <button>
+                  {false ? (
+                    <IoMdHeartEmpty size={30} />
+                  ) : (
+                    <IoMdHeart size={30} className="text-red-500" />
+                  )}
+                </button>
+              </div>
               <h3 className="font-bold text-lg mt-3">Description: </h3>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit

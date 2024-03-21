@@ -76,47 +76,47 @@ const BookList = () => {
           {!isListLoading && listError && <h4>Error</h4>}
 
           {!isListLoading && !listError && listData && listData && (
-            <div className="w-full mt-[20px] ">
+            <div className="w-full mt-[20px] overflow-x-auto">
               <table className="w-full border border-green-600 border-collapse">
                 <thead>
                   <tr>
-                    <th className="border border-green-600 px-[20px] py-[5px]">
+                    <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                       Name in English
                     </th>
-                    <th className="border border-green-600 px-[20px] py-[5px]">
+                    <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                       Name in Bangla
                     </th>
-                    <th className="border border-green-600 px-[20px] py-[5px]">
+                    <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                       Total Available
                     </th>
-                    <th className="border border-green-600 px-[20px] py-[5px]">
+                    <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                       Quantity
                     </th>
-                    <th className="border border-green-600 px-[20px] py-[5px]">
+                    <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                       Edition
                     </th>
-                    <th className="border border-green-600 px-[20px] py-[5px]">
+                    <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                       Genre
                     </th>
-                    <th className="border border-green-600 px-[20px] py-[5px]">
+                    <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                       Writer
                     </th>
-                    <th className="border border-green-600 px-[20px] py-[5px]">
+                    <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                       Donate or Buy
                     </th>
-                    <th className="border border-green-600 px-[20px] py-[5px]">
+                    <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                       Donor Name
                     </th>
-                    <th className="border border-green-600 px-[20px] py-[5px]">
+                    <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                       Donate Date
                     </th>
-                    <th className="border border-green-600 px-[20px] py-[5px]">
+                    <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                       Price
                     </th>
-                    <th className="border border-green-600 px-[20px] py-[5px]">
+                    <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                       Purchase Date
                     </th>
-                    <th className="border border-green-600 px-[20px] py-[5px]">
+                    <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                       Action
                     </th>
                   </tr>
