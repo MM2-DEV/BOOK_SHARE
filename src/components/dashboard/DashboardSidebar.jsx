@@ -46,7 +46,7 @@ const DashboardSidebar = () => {
               </Disclosure.Button>
 
               <Disclosure.Panel className="px-3 py-2 text-sm text-purple-900">
-                <ul >
+                <ul>
                   <li className="mb-2">
                     <Link to={"/dashboard/writers"}>All Writers</Link>
                   </li>
@@ -73,7 +73,7 @@ const DashboardSidebar = () => {
               </Disclosure.Button>
 
               <Disclosure.Panel className="px-3 py-2 text-sm text-purple-900">
-                <ul >
+                <ul>
                   <li className="mb-2">
                     <Link to={"/dashboard/donors"}>All Donors</Link>
                   </li>
@@ -100,7 +100,7 @@ const DashboardSidebar = () => {
               </Disclosure.Button>
 
               <Disclosure.Panel className="px-3 py-2 text-sm text-purple-900">
-                <ul >
+                <ul>
                   <li className="mb-2">
                     <Link to={"/dashboard/genres"}>All Genres</Link>
                   </li>
@@ -127,7 +127,7 @@ const DashboardSidebar = () => {
               </Disclosure.Button>
 
               <Disclosure.Panel className="px-3 py-2 text-sm text-purple-900">
-                <ul >
+                <ul>
                   <li className="mb-2">
                     <Link to={"/dashboard/ratings"}>All Ratings</Link>
                   </li>
@@ -154,7 +154,7 @@ const DashboardSidebar = () => {
               </Disclosure.Button>
 
               <Disclosure.Panel className="px-3 py-2 text-sm text-purple-900">
-                <ul >
+                <ul>
                   <li className="mb-2">
                     <Link to={"/dashboard/reviews"}>All Reviews</Link>
                   </li>
@@ -167,8 +167,6 @@ const DashboardSidebar = () => {
             </>
           )}
         </Disclosure>
-
-       
 
         <Disclosure as="div" className="mt-2">
           {({ open }) => (
@@ -183,13 +181,9 @@ const DashboardSidebar = () => {
               </Disclosure.Button>
 
               <Disclosure.Panel className="px-3 py-2 text-sm text-purple-900">
-                <ul >
+                <ul>
                   <li className="mb-2">
-                    <Link to={"/dashboard/readerLoves"}>All Readers Love</Link>
-                  </li>
-
-                  <li className="mb-2">
-                    <Link to={"/dashboard/readerLoves/create"}>Add Reader Loves</Link>
+                    <Link to={"/dashboard/reader-loves"}>All Readers Love</Link>
                   </li>
                 </ul>
               </Disclosure.Panel>
@@ -210,16 +204,15 @@ const DashboardSidebar = () => {
               </Disclosure.Button>
 
               <Disclosure.Panel className="px-3 py-2 text-sm text-purple-900">
-                <ul >
+                <ul>
                   <li className="mb-2">
-                    <Link to={"/dashboard/borrowRequests"}>All Requests</Link>
+                    <Link to={"/dashboard/borrow-requests"}>All Requests</Link>
                   </li>
                 </ul>
               </Disclosure.Panel>
             </>
           )}
         </Disclosure>
-
       </div>
     </div>
   );

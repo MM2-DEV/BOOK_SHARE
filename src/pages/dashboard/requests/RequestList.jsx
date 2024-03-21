@@ -5,23 +5,14 @@ import { Link } from "react-router-dom";
 import { FaPlus } from "react-icons/fa6";
 import useRequestList from "../../../hooks/useRequestList";
 
-
 const RequestList = () => {
-
-  const {isListLoading, listError, listData} = useRequestList()
+  const { isListLoading, listError, listData } = useRequestList();
   return (
     <div className="w-full">
       <div className="bg-slate-100 p-3 rounded-lg flex items-center justify-between">
         <div>
           <h2 className="text-xl">All Requests</h2>
           <p className="text-xs">All request list of this virtual library</p>
-        </div>
-        <div>
-          <Link to="/dashboard/borrowRequests/create">
-            <button className="bg-blue-500 hover:bg-blue-700 text-white flex items-center justify-center py-2 px-4 rounded-full">
-              <FaPlus color="#fff" className="mr-1" /> Add New
-            </button>
-          </Link>
         </div>
       </div>
 

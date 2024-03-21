@@ -122,7 +122,7 @@ const AllBooks = () => {
       </div>
 
       <div className="bg-white p-2 rounded-md mt-[20px] text-center">
-        <button className="grow ml-2 p-2 rounded-lg border border-green-400 bg-green-400 text-white">
+        <button className="grow ml-2 p-2 rounded-lg border border-teal-500 bg-teal-500 text-white">
           Load More
         </button>
       </div>

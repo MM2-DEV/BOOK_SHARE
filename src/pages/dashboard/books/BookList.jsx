@@ -76,7 +76,7 @@ const BookList = () => {
           {!isListLoading && listError && <h4>Error</h4>}
 
           {!isListLoading && !listError && listData && listData && (
-            <div className="w-full mt-[20px] overflow-auto">
+            <div className="w-full mt-[20px] ">
               <table className="w-full border border-green-600 border-collapse">
                 <thead>
                   <tr>
