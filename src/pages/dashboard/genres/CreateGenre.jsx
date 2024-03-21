@@ -11,6 +11,7 @@ import useGenre from "../../../hooks/useGenre";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createGenreSchema } from "../../../validation/dashboard/genre";
 import { toast } from "react-toastify";
+import { v4 as uuidv4 } from "uuid";
 
 const CreateGenre = () => {
   const {
@@ -50,7 +51,7 @@ const CreateGenre = () => {
     console.log("submit handler :", data);
 
     const requestBody = {
-      id: 11,
+      id: uuidv4(),
       name: data.name,
       description: data.description,
       date: data.date,

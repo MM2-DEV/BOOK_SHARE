@@ -1,15 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FaRegPaperPlane } from "react-icons/fa";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { createContactSchema } from "../validation/dashboard/contact";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import useContact from "../hooks/useContact";
+import { v4 as uuidv4 } from "uuid";
+import {
+  createContactRequest,
+  updateContactRequest,
+} from "../store/actions/contact/contactActionHandlers";
+import { toast } from "react-toastify";
 
 const ContactPage = () => {
-  const { register, handleSubmit } = useForm({
-    defaultValues: {
-      name: "",
-      email: "",
-      message: "",
-    },
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(createContactSchema),
   });
+
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const contactState = useContact();
+
+  const params = useParams();
+
+  const {
+    isCreateSuccess,
+    isSingleSuccess,
+    singleData,
+    isUpdateSuccess,
+    isCreateError,
+    isUpdateError,
+  } = contactState;
 
   const inputChangeHandler = (data) => {
     console.log("inputChangeHandler:");
@@ -17,7 +46,62 @@ const ContactPage = () => {
 
   const submitHandler = (data) => {
     console.log("submit handler :", data);
+
+    const requestBody = {
+      id: uuidv4(),
+      name: data.name,
+      email: data.email,
+      title: data.title,
+      message: data.message,
+    };
+
+    if (params.id) {
+      dispatch(
+        updateContactRequest({ requestBody: requestBody, id: params.id })
+      );
+    } else {
+      dispatch(createContactRequest(requestBody));
+    }
   };
+
+  useEffect(() => {
+    if (isCreateSuccess) {
+      toast.success("Contact request created successfully.", {
+        position: "top-right",
+      });
+
+      navigate("/dashboard/contact-requests");
+    }
+
+    if (isCreateError) {
+      toast.error("Contact request was not created.", {
+        position: "top-right",
+      });
+    }
+  }, [isCreateSuccess, isCreateError]);
+
+  useEffect(() => {
+    if (isUpdateSuccess) {
+      toast.success("Contact request updated successfully.", {
+        position: "top-right",
+      });
+      navigate("/dashboard/contact-requests");
+    }
+
+    if (isUpdateError) {
+      toast.success("Contact request was not updated.", {
+        position: "top-right",
+      });
+    }
+  }, [isUpdateSuccess, isUpdateError]);
+
+  useEffect(() => {
+    if (isSingleSuccess && singleData) {
+      setValue("name", singleData.name);
+      setValue("email", singleData.email);
+      setValue("message", singleData.message);
+    }
+  }, [isSingleSuccess, singleData]);
 
   return (
     <div>
@@ -29,15 +113,11 @@ const ContactPage = () => {
 
       <div className="p-4 mt-4 bg-slate-100 rounded-md">
         <div className="flex justify-between flex-wrap">
-          <div className="basis-full md:basis-1/4 p-4 rounded-md ">
-            
-          </div>
+          <div className="basis-full md:basis-1/4 p-4 rounded-md "></div>
 
           <div className="basis-full md:basis-3/4 p-4 rounded-md">
             <div className="bg-white p-4 rounded-md">
               <div className="mt-5 bg-slate-100 p-3 rounded-lg">
-
-
                 <div className="mt-4">
                   <form onSubmit={handleSubmit(submitHandler)}>
                     <div className="flex flex-col md:flex-row text-sm">
@@ -53,6 +133,7 @@ const ContactPage = () => {
                           placeholder="Name"
                           onChange={inputChangeHandler}
                         />
+                        <p className=" text-red-600">{errors?.name?.message}</p>
                       </div>
                     </div>
 
@@ -69,6 +150,9 @@ const ContactPage = () => {
                           placeholder="Email"
                           onChange={inputChangeHandler}
                         />
+                        <p className=" text-red-600">
+                          {errors?.email?.message}
+                        </p>
                       </div>
                     </div>
 
@@ -84,6 +168,9 @@ const ContactPage = () => {
                           {...register("message")}
                           placeholder="Message"
                         ></textarea>
+                        <p className=" text-red-600">
+                          {errors?.message?.message}
+                        </p>
                       </div>
                     </div>
 

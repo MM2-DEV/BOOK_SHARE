@@ -25,6 +25,7 @@ import ReaderList from "./pages/dashboard/readers/ReaderList";
 import CreateReader from "./pages/dashboard/readers/CreateReader";
 import RequestList from "./pages/dashboard/requests/RequestList";
 import BookDetails from "./pages/BookDetails";
+import ContactList from "./pages/dashboard/contact/ContactList";
 
 const routes1 = createBrowserRouter([
   {
@@ -48,9 +49,24 @@ const routes1 = createBrowserRouter([
         element: <HomePage />,
       },
 
+      // {
+      //   path: "contact",
+      //   element: <ContactPage />,
+      // },
+
       {
         path: "contact",
-        element: <ContactPage />,
+        children: [
+          {
+            index: true,
+            element: <ContactPage />,
+          },
+
+          {
+            path: "contact/:id",
+            element: <ContactPage />,
+          },
+        ],
       },
       {
         path: "/book-details",
@@ -182,7 +198,6 @@ const routes1 = createBrowserRouter([
             index: true,
             element: <ReaderList />,
           },
-       
         ],
       },
 
@@ -192,6 +207,16 @@ const routes1 = createBrowserRouter([
           {
             index: true,
             element: <RequestList />,
+          },
+        ],
+      },
+
+      {
+        path: "contact-requests",
+        children: [
+          {
+            index: true,
+            element: <ContactList />,
           },
         ],
       },
