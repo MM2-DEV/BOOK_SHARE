@@ -49,9 +49,24 @@ const routes1 = createBrowserRouter([
         element: <HomePage />,
       },
 
+      // {
+      //   path: "contact",
+      //   element: <ContactPage />,
+      // },
+
       {
         path: "contact",
-        element: <ContactPage />,
+        children: [
+          {
+            index: true,
+            element: <ContactPage />,
+          },
+
+          {
+            path: "contact/:id",
+            element: <ContactPage />,
+          },
+        ],
       },
       {
         path: "/book-details",
@@ -183,7 +198,6 @@ const routes1 = createBrowserRouter([
             index: true,
             element: <ReaderList />,
           },
-       
         ],
       },
 
@@ -202,7 +216,7 @@ const routes1 = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <ContactList/>,
+            element: <ContactList />,
           },
         ],
       },
