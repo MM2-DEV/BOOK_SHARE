@@ -45,7 +45,7 @@ const ContactPage = () => {
   const submitHandler = (data) => {
     const requestBody = {
       id: uuidv4(),
-      name: data.name,
+      userId: 1,
       email: data.email,
       title: data.title,
       message: data.message,
@@ -66,7 +66,10 @@ const ContactPage = () => {
         position: "top-right",
       });
 
-      navigate("/dashboard/contact-requests");
+      // navigate("/dashboard/contact-requests");
+      setValue("email", "");
+      setValue("title", "");
+      setValue("message", "");
     }
 
     if (isCreateError) {
@@ -81,7 +84,10 @@ const ContactPage = () => {
       toast.success("Contact request updated successfully.", {
         position: "top-right",
       });
-      navigate("/dashboard/contact-requests");
+      // navigate("/dashboard/contact-requests");
+      setValue("email", "");
+      setValue("title", "");
+      setValue("message", "");
     }
 
     if (isUpdateError) {
@@ -93,8 +99,8 @@ const ContactPage = () => {
 
   useEffect(() => {
     if (isSingleSuccess && singleData) {
-      setValue("name", singleData.name);
       setValue("email", singleData.email);
+      setValue("title", singleData.title);
       setValue("message", singleData.message);
     }
   }, [isSingleSuccess, singleData]);
@@ -118,15 +124,15 @@ const ContactPage = () => {
                   <form onSubmit={handleSubmit(submitHandler)}>
                     <div className="flex flex-col md:flex-row text-sm">
                       <label className="basis-full md:basis-1/3 p-1">
-                        Name
+                        Title
                       </label>
                       <div className="p-1 basis-full md:basis-3/3">
                         <input
                           type="text"
-                          name="name"
-                          {...register("name")}
+                          name="title"
+                          {...register("title")}
                           className="w-full p-2 border rounded-md focus:border-green-900 focus:outline-none placeholder:text-sm"
-                          placeholder="Name"
+                          placeholder="Title"
                           onChange={inputChangeHandler}
                         />
                         <p className=" text-red-600">{errors?.name?.message}</p>

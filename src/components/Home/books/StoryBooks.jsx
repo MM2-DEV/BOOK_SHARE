@@ -57,7 +57,6 @@ const StoryBooks = () => {
       writer: "Munna",
       love: "1",
       genre: "Story Book",
-
       name: "Book 6",
       src: "https://www.eltbooks.com/cover/9780134306667.jpg",
     },
@@ -65,7 +64,6 @@ const StoryBooks = () => {
       writer: "Munna",
       love: "1",
       genre: "Story Book",
-
       name: "Book 7",
       src: "https://d25swln94uq8y4.cloudfront.net/media/book_th/Samyabadi.jpg",
     },

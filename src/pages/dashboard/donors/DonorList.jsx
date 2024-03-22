@@ -18,7 +18,6 @@ const DonorList = () => {
   const { isListLoading, listError, listData, isDeleteSuccess, isDeleteError } =
     useDonorList();
 
-
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -62,7 +61,7 @@ const DonorList = () => {
           </div>
           <div>
             <Link to="/dashboard/donors/create">
-              <button className=" bg-blue-500 hover:bg-blue-700 text-white flex items-center justify-center py-2 px-4 rounded-full">
+              <button className=" text-white flex items-center justify-center py-2 px-4 rounded-full  border border-teal-500 bg-teal-500 hover:bg-teal-400 hover:border-teal-400">
                 <FaPlus color="#fff" className="mr-1" /> Add New
               </button>
             </Link>

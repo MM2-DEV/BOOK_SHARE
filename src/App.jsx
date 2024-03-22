@@ -30,13 +30,13 @@ import UserList from "./pages/dashboard/users/UserList";
 
 const routes1 = createBrowserRouter([
   {
-    path: "/signin",
+    path: "/sign-in",
     element: <SignInPage />,
     children: [],
   },
 
   {
-    path: "/signup",
+    path: "/sign-up",
     element: <SignUpPage />,
     children: [],
   },
@@ -50,11 +50,6 @@ const routes1 = createBrowserRouter([
         element: <HomePage />,
       },
 
-      // {
-      //   path: "contact",
-      //   element: <ContactPage />,
-      // },
-
       {
         path: "contact",
         children: [
@@ -64,7 +59,7 @@ const routes1 = createBrowserRouter([
           },
 
           {
-            path: "contact/:id",
+            path: ":id",
             element: <ContactPage />,
           },
         ],
