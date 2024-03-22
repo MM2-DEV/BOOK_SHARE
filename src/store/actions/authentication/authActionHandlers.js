@@ -2,11 +2,11 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const signUp = createAsyncThunk(
-  "authentication/createSignup",
-  async (inputState) => {
-    const url = "";
+  "authentication/signUp",
+  async (requestBody) => {
+    const url = "https://book-share-json-server.onrender.com/users";
 
-    const res = await axios.post(url, inputState);
+    const res = await axios.post(url, requestBody);
 
     return res.data;
   }
