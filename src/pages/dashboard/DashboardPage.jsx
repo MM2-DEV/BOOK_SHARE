@@ -16,7 +16,7 @@ const DashboardPage = () => {
               <button
                 className=" mr-2 py-2 px-4 rounded-lg border border-teal-500 bg-teal-500"
                 onClick={() => {
-                  navigate("#");
+                  navigate("/dashboard/users");
                 }}
               >
                 View
