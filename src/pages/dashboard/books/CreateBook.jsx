@@ -40,6 +40,7 @@ const CreateBook = () => {
     setValue,
     formState: { errors },
   } = useForm({
+    mode: "onBlur",
     resolver: yupResolver(createBookSchema),
   });
 
@@ -75,27 +76,25 @@ const CreateBook = () => {
       nameBn: data.nameBn,
       image: data.image,
       isDonateOrBuy: data.isDonateOrBuy,
-      totalAvailable: data.totalAvailable,
+      totalAvailable: data.totalCount,
       totalCount: data.totalCount,
       totalReaders: [],
       edition: data.edition,
-      genreId: Number(data.genreId) || null,
-      writerId: Number(data.writerId) || null,
-      bookDonorId: Number(data.writerId) || null,
-      donateDate: data.donateDate,
-      purchaseDate: data.purchaseDate,
-      price: data.price,
+      genreId: Number(data.genreId) || "",
+      writerId: Number(data.writerId) || "",
+      bookDonorId: isDonateOrBuy ? Number(data.donorId) || "" : "",
+      donateDate: isDonateOrBuy ? data.donateDate || "" : "",
+      price: isDonateOrBuy ? 0 : data.price,
+      purchaseDate: isDonateOrBuy ? "" : data.purchaseDate || "",
       isBorrowRequest: false,
       isShared: false,
     };
 
-    console.log("submit handler requestBody:", requestBody);
-
-    // if (params.id) {
-    //   dispatch(updateBook({ requestBody: requestBody, id: params.id }));
-    // } else {
-    //   dispatch(createBook(requestBody));
-    // }
+    if (params.id) {
+      dispatch(updateBook({ requestBody: requestBody, id: params.id }));
+    } else {
+      dispatch(createBook(requestBody));
+    }
   };
 
   useEffect(() => {
@@ -133,14 +132,18 @@ const CreateBook = () => {
     if (isSingleSuccess && singleData) {
       setValue("nameEn", singleData.nameEn);
       setValue("nameBn", singleData.nameBn);
+      setValue("image", singleData.image);
       setValue("totalCount", singleData.totalCount);
       setValue("edition", singleData.edition);
-      setValue("genre", singleData.genre);
-      setValue("writer", singleData.writer);
-      setValue("donor", singleData.donor);
+      setValue("genreId", singleData.genreId);
+      setValue("writerId", singleData.writerId);
+      setValue("donorId", singleData.bookDonorId);
       setValue("donateDate", singleData.donateDate);
       setValue("price", singleData.price);
       setValue("purchaseDate", singleData.purchaseDate);
+      setValue("isDonateOrBuy", singleData.isDonateOrBuy);
+
+      setIsDonateOrBuy(singleData.isDonateOrBuy);
     }
   }, [isSingleSuccess, singleData]);
 
@@ -167,6 +170,7 @@ const CreateBook = () => {
                   placeholder="Enter Name in English"
                   onChange={inputChangeHandler}
                 />
+
                 <p className=" text-red-600">{errors?.nameEn?.message}</p>
               </div>
             </div>
@@ -201,6 +205,7 @@ const CreateBook = () => {
                   placeholder="Enter Valid Image Url"
                   onChange={inputChangeHandler}
                 />
+                <p className=" text-red-600">{errors?.image?.message}</p>
               </div>
             </div>
 
@@ -227,7 +232,7 @@ const CreateBook = () => {
                   name="edition"
                   {...register("edition")}
                   className="w-full p-2 border rounded-md focus:border-green-900 focus:outline-none placeholder:text-sm"
-                  placeholder="Enter Edition "
+                  placeholder="Enter Edition"
                   onChange={inputChangeHandler}
                 />
                 <p className=" text-red-600">{errors?.edition?.message}</p>
@@ -238,17 +243,21 @@ const CreateBook = () => {
               <label className="basis-full md:basis-1/3 p-1">Genre</label>
               <div className="p-1 basis-full md:basis-3/3">
                 <select
-                  {...register("genre")}
+                  {...register("genreId")}
                   className="w-full bg-white p-2 border rounded-md focus:border-green-900 focus:outline-none placeholder:text-sm"
                 >
                   <option value="">Select</option>
                   {genreListData
                     ? genreListData.map((item, index) => {
-                        return <option value={item.id}>{item.name}</option>;
+                        return (
+                          <option key={index} value={item.id}>
+                            {item.name}
+                          </option>
+                        );
                       })
                     : ""}
                 </select>
-                <p className=" text-red-600">{errors?.genre?.message}</p>
+                <p className=" text-red-600">{errors?.genreId?.message}</p>
               </div>
             </div>
 
@@ -256,17 +265,21 @@ const CreateBook = () => {
               <label className="basis-full md:basis-1/3 p-1">Writer</label>
               <div className="p-1 basis-full md:basis-3/3">
                 <select
-                  {...register("writer")}
+                  {...register("writerId")}
                   className="w-full bg-white p-2 border rounded-md focus:border-green-900 focus:outline-none placeholder:text-sm"
                 >
                   <option value="">Select</option>
                   {writerListData
                     ? writerListData.map((item, index) => {
-                        return <option value={item.id}>{item.name}</option>;
+                        return (
+                          <option key={index} value={item.id}>
+                            {item.name}
+                          </option>
+                        );
                       })
                     : ""}
                 </select>
-                <p className=" text-red-600">{errors?.writer?.message}</p>
+                <p className=" text-red-600">{errors?.writerId?.message}</p>
               </div>
             </div>
 
@@ -294,17 +307,21 @@ const CreateBook = () => {
                   <label className="basis-full md:basis-1/3 p-1">Donor</label>
                   <div className="p-1 basis-full md:basis-3/3">
                     <select
-                      {...register("donor")}
+                      {...register("donorId")}
                       className="w-full bg-white p-2 border rounded-md focus:border-green-900 focus:outline-none placeholder:text-sm"
                     >
                       <option value="">Select</option>
                       {listData
                         ? listData.map((item, index) => {
-                            return <option value={item.id}>{item.name}</option>;
+                            return (
+                              <option key={index} value={item.id}>
+                                {item.name}
+                              </option>
+                            );
                           })
                         : ""}
                     </select>
-                    <p className=" text-red-600">{errors?.donor?.message}</p>
+                    <p className=" text-red-600">{errors?.donorId?.message}</p>
                   </div>
                 </div>
                 <div className="flex flex-col md:flex-row text-sm">

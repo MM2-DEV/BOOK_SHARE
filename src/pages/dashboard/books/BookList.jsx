@@ -123,7 +123,7 @@ const BookList = () => {
                 <tbody>
                   {listData.map((item, index) => {
                     return (
-                      <tr>
+                      <tr key={index}>
                         <td className="border border-green-600 px-[20px] py-[5px]">
                           {item.nameEn}
                         </td>
@@ -140,41 +140,38 @@ const BookList = () => {
                           {item.edition}
                         </td>
                         <td className="border border-green-600 px-[20px] py-[5px]">
-                          {item.genre.name}
+                          {item.genre?.name}
                         </td>
                         <td className="border border-green-600 px-[20px] py-[5px]">
-                          {item.writer.name}
+                          {item.writer?.name}
                         </td>
                         <td className="border border-green-600 px-[20px] py-[5px]">
                           Donate or Buy
                         </td>
                         <td className="border border-green-600 px-[20px] py-[5px]">
-                          {item.bookDonor.name}
+                          {item.bookDonor?.name || "N/A"}
                         </td>
                         <td className="border border-green-600 px-[20px] py-[5px]">
-                          {item.donorDate}
+                          {item.donateDate || "N/A"}
                         </td>
                         <td className="border border-green-600 px-[20px] py-[5px]">
-                          {item.price}
+                          {item.price || "N/A"}
                         </td>
                         <td className="border border-green-600 px-[20px] py-[5px]">
-                          {item.purchaseDate}
+                          {item.purchaseDate || "N/A"}
                         </td>
                         <td className="border border-green-600 px-[20px] py-[5px]">
-                          <div className="w-full flex gap-2 items-center justify-between">
-                            <div>
-                              <FaRegEye size={25} color="#60a5fa" />
-                            </div>
-                            <div
+                          <div className="w-full flex gap-4 items-center justify-between">
+                            <button
                               onClick={() =>
                                 navigate(`/dashboard/books/create/${item.id}`)
                               }
                             >
-                              <FaPen size={22} color="#eab308" />
-                            </div>
-                            <div onClick={() => openHandler(item.id)}>
+                              <FaPen size={20} color="#eab308" />
+                            </button>
+                            <button onClick={() => openHandler(item.id)}>
                               <MdDelete size={25} color="#f43f5e" />
-                            </div>
+                            </button>
                           </div>{" "}
                         </td>
                       </tr>
