@@ -14,6 +14,7 @@ import contactReducer from "./reducers/contactReducer";
 
 const store = configureStore({
   reducer: combineReducers({
+    auth: authReducer,
     users: userReducer,
     book: bookReducer,
     writers: writerReducer,
