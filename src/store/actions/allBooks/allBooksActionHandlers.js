@@ -5,7 +5,7 @@ export const getStoryBookList = createAsyncThunk(
   "allBooks/getStoryBookList",
   async () => {
     const url =
-      "https://book-share-json-server.onrender.com/books?_expand=genre&_expand=writer";
+      "https://book-share-json-server.onrender.com/books?genreId=1&_expand=genre&_expand=writer";
     const res = await axios.get(url);
 
     return res.data;
@@ -16,7 +16,7 @@ export const getAcademicBookList = createAsyncThunk(
   "allBooks/getAcademicBookList",
   async () => {
     const url =
-      "https://book-share-json-server.onrender.com/books?_expand=genre&_expand=writer";
+      "https://book-share-json-server.onrender.com/books?genreId=2&_expand=genre&_expand=writer";
     const res = await axios.get(url);
 
     return res.data;
@@ -27,7 +27,7 @@ export const getGeneralKnowledgeBookList = createAsyncThunk(
   "allBooks/getGeneralKnowledgeBookList",
   async () => {
     const url =
-      "https://book-share-json-server.onrender.com/books?_expand=genre&_expand=writer";
+      "https://book-share-json-server.onrender.com/books?genreId=3&_expand=genre&_expand=writer";
     const res = await axios.get(url);
 
     return res.data;
