@@ -23,7 +23,7 @@ const Header = () => {
           </h1>
         </div>
 
-        <ul className="hidden md:flex text-xl">
+        <ul className="hidden md:flex items-center text-xl">
           <li className="p-4">
             <NavLink
               to={"/"}
@@ -52,6 +52,16 @@ const Header = () => {
               }
             >
               Contact
+            </NavLink>
+          </li>
+          <li className="p-4">
+            <NavLink
+              to={"/sign-in"}
+              className={({ isActive, isPending }) =>
+                isActive ? "border-b-2 text-sm" : "text-sm"
+              }
+            >
+              {false ? "Logout" : "Sign-in/Sign-up"}
             </NavLink>
           </li>
         </ul>
@@ -115,6 +125,16 @@ const Header = () => {
                 }
               >
                 Contact
+              </NavLink>
+            </li>
+            <li className="p-4 text-xs">
+              <NavLink
+                to={"/sign-in"}
+                className={({ isActive, isPending }) =>
+                  isActive ? "border-b-2 text-sm" : "text-sm"
+                }
+              >
+                {false ? "Logout" : "Sign-in/Sign-up"}
               </NavLink>
             </li>
           </ul>
