@@ -4,9 +4,14 @@ import React from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { getLocalStorageItem, removeLocalStorageItem } from "../utils/utils";
+import { useDispatch } from "react-redux";
+import { logoutActionHandler } from "../store/reducers/authReducer";
+import { toast } from "react-toastify";
 
 const Header = () => {
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const [nav, setNav] = useState(false);
   const handleNav = () => {
@@ -14,6 +19,18 @@ const Header = () => {
   };
 
   const localStorageAuthData = getLocalStorageItem("user");
+
+  const logoutHandler = () => {
+    dispatch(logoutActionHandler());
+
+    toast.success("Sign out successful.", {
+      position: "top-right",
+    });
+
+    removeLocalStorageItem("user");
+
+    navigate("/sign-in");
+  };
 
   return (
     <div className="bg-teal-500">
@@ -69,8 +86,7 @@ const Header = () => {
               <span
                 className="text-sm cursor-pointer"
                 onClick={() => {
-                  removeLocalStorageItem("user");
-                  navigate("/sign-in");
+                  logoutHandler();
                 }}
               >
                 Logout
@@ -149,8 +165,7 @@ const Header = () => {
                 <span
                   className="text-sm cursor-pointer"
                   onClick={() => {
-                    removeLocalStorageItem("user");
-                    navigate("/sign-in");
+                    logoutHandler();
                   }}
                 >
                   Logout
