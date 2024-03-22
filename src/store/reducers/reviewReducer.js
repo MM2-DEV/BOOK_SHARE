@@ -95,7 +95,6 @@ const userSlice = createSlice({
 
     // get single review 
     builder.addCase(getReview.pending, (state, action) => {
-      console.log("action pending:", action);
       state.isSingleLoading = true;
       state.isSingleError = false;
       state.isSingleSuccess = false;
@@ -104,7 +103,6 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getReview.rejected, (state, action) => {
-      console.log("action rejected:", action);
 
       const { type, payload, error } = action;
 
@@ -116,7 +114,6 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getReview.fulfilled, (state, action) => {
-      console.log("action fulfilled:", action);
 
       const { payload } = action;
 

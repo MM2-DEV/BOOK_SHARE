@@ -17,7 +17,6 @@ const BookList = () => {
 
   const { isListLoading, listError, listData, isDeleteSuccess, isDeleteError } =
     useBookList();
-  console.log("listdata:", listData);
 
   const dispatch = useDispatch();
 

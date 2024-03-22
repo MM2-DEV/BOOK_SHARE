@@ -9,7 +9,7 @@ export const createBookSchema = yup.object({
   genre: yup.string().required("Genre Name is required"),
   writer: yup.string().required("Writer Name is required"),
 
-  isDonateOrBuy: yup.string().required("Donate or Buy is required"),
+  isDonateOrBuy: yup.boolean(),
 
   donor: yup.string().when("isDonateOrBuy", {
     is: true,

@@ -6,8 +6,6 @@ const useGeneralKnowledgeBook = () => {
   const generalKnowledgeBookState = useSelector((store) => store.allBooks);
   const dispatch = useDispatch();
 
-  console.log("generalKnowledgeBookState:", generalKnowledgeBookState);
-
   useEffect(() => {
     dispatch(getGeneralKnowledgeBookList());
   }, []);

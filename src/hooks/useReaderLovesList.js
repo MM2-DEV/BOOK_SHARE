@@ -8,8 +8,6 @@ const useReaderLovesList = () => {
 
   const dispatch = useDispatch();
 
-  console.log("readerLovesState:", readerLovesState)
-
   const {isDeleteSuccess} = readerLovesState
 
   useEffect(() => {

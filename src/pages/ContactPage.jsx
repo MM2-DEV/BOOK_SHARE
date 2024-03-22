@@ -40,13 +40,9 @@ const ContactPage = () => {
     isUpdateError,
   } = contactState;
 
-  const inputChangeHandler = (data) => {
-    console.log("inputChangeHandler:");
-  };
+  const inputChangeHandler = (data) => {};
 
   const submitHandler = (data) => {
-    console.log("submit handler :", data);
-
     const requestBody = {
       id: uuidv4(),
       name: data.name,

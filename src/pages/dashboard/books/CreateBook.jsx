@@ -34,8 +34,6 @@ const CreateBook = () => {
 
   const [isDonateOrBuy, setIsDonateOrBuy] = useState(false);
 
-  console.log("isDonateOrBuy", isDonateOrBuy);
-
   const {
     register,
     handleSubmit,
@@ -52,7 +50,6 @@ const CreateBook = () => {
   const params = useParams();
 
   const bookState = useBook();
-  console.log("bookState", bookState);
 
   const {
     isCreateSuccess,
@@ -64,8 +61,6 @@ const CreateBook = () => {
   } = bookState;
 
   const inputChangeHandler = (event) => {
-    console.log("inputChangeHandler:", event.target.checked);
-
     if (event.target.name === "isDonateOrBuy") {
       setIsDonateOrBuy(event.target.checked);
     }
@@ -94,11 +89,13 @@ const CreateBook = () => {
       isShared: false,
     };
 
-    if (params.id) {
-      dispatch(updateBook({ requestBody: requestBody, id: params.id }));
-    } else {
-      dispatch(createBook(requestBody));
-    }
+    console.log("submit handler requestBody:", requestBody);
+
+    // if (params.id) {
+    //   dispatch(updateBook({ requestBody: requestBody, id: params.id }));
+    // } else {
+    //   dispatch(createBook(requestBody));
+    // }
   };
 
   useEffect(() => {

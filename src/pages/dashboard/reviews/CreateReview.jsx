@@ -34,11 +34,11 @@ const CreateReview = () => {
   const dispatch = useDispatch();
 
   const inputChangeHandler = (data) => {
-    console.log("inputChangeHandler:");
+    
   };
 
   const submitHandler = (data) => {
-    console.log("submit handler :", data);
+  
 
     const requestBody = {
       id: uuidv4(),

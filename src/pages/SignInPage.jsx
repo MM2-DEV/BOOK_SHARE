@@ -2,22 +2,16 @@ import React from "react";
 import { useForm } from "react-hook-form";
 
 const SignInPage = () => {
-
-  const {register, handleSubmit} = useForm({
-    defaultValues:{
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
       name: "",
       password: "",
-    }
+    },
   });
 
- 
-  const inputChangeHandler = (data) => {
-    console.log("inputChangeHandler:");
-  };
+  const inputChangeHandler = (data) => {};
 
-  const submitHandler = (data) => {
-    console.log("Submit Handler:", data);
-  };
+  const submitHandler = (data) => {};
 
   return (
     <div className="mt-8">

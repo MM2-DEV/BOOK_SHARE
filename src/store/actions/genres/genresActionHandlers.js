@@ -6,7 +6,6 @@ export const getGenreList = createAsyncThunk(
   async () => {
     const url = "https://book-share-json-server.onrender.com/genres";
     const res = await axios.get(url);
-    console.log("res:", res);
 
     return res.data;
   }
@@ -34,8 +33,7 @@ export const createGenre = createAsyncThunk(
 export const updateGenre = createAsyncThunk(
   "genres/updateGenre",
   async (data) => {
-    console.log("request body:", data.requestBody);
-    console.log("id:", data.id);
+
 
     const url = `https://book-share-json-server.onrender.com/genres/${data.id}`;
 

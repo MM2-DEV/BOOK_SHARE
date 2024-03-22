@@ -17,7 +17,7 @@ const DonorList = () => {
 
   const { isListLoading, listError, listData, isDeleteSuccess, isDeleteError } =
     useDonorList();
-  console.log("listdata:", listData);
+
 
   const navigate = useNavigate();
 

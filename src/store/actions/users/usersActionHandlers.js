@@ -11,8 +11,6 @@ export const getUserList = createAsyncThunk("users/getUserList", async () => {
 export const createUser = createAsyncThunk(
   "users/createUser",
   async (inputState) => {
-    console.log("request body:", inputState);
-
     const url = "https://book-share-json-server.onrender.com/users";
 
     const res = await axios.post(url, inputState);

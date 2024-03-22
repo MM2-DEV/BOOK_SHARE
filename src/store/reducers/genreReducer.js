@@ -43,7 +43,6 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     // get genre data
     builder.addCase(getGenreList.pending, (state, action) => {
-      console.log("action pending:", action);
       state.isListLoading = true;
       state.isListError = false;
       state.isListSuccess = false;
@@ -73,7 +72,6 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getGenreList.rejected, (state, action) => {
-      console.log("action rejected:", action);
 
       const { type, payload, error } = action;
 
@@ -85,7 +83,6 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getGenreList.fulfilled, (state, action) => {
-      console.log("action fulfilled:", action);
 
       const { payload } = action;
 
@@ -106,7 +103,6 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getGenre.rejected, (state, action) => {
-      console.log("action rejected:", action);
 
       const { type, payload, error } = action;
 
@@ -118,7 +114,6 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getGenre.fulfilled, (state, action) => {
-      console.log("action fulfilled:", action);
 
       const { payload } = action;
 

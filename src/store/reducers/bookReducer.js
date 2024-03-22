@@ -4,7 +4,7 @@ import {
   deleteBook,
   getBookList,
   getBook,
-  updateBook
+  updateBook,
 } from "../actions/book/bookActionHandler";
 
 const initialState = {
@@ -43,7 +43,6 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     // get book data
     builder.addCase(getBookList.pending, (state, action) => {
-      console.log("action pending:", action);
       state.isListLoading = true;
       state.isListError = false;
       state.isListSuccess = false;
@@ -73,8 +72,6 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getBookList.rejected, (state, action) => {
-      console.log("action rejected:", action);
-
       const { type, payload, error } = action;
 
       state.isListLoading = false;
@@ -85,8 +82,6 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getBookList.fulfilled, (state, action) => {
-      console.log("action fulfilled:", action);
-
       const { payload } = action;
 
       state.isListLoading = false;
@@ -96,9 +91,8 @@ const userSlice = createSlice({
       state.listError = null;
     });
 
-    // get single book 
+    // get single book
     builder.addCase(getBook.pending, (state, action) => {
-      console.log("action pending:", action);
       state.isSingleLoading = true;
       state.isSingleError = false;
       state.isSingleSuccess = false;
@@ -107,8 +101,6 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getBook.rejected, (state, action) => {
-      console.log("action rejected:", action);
-
       const { type, payload, error } = action;
 
       state.isSingleLoading = false;
@@ -119,8 +111,6 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getBook.fulfilled, (state, action) => {
-      console.log("action fulfilled:", action);
-
       const { payload } = action;
 
       state.isSingleLoading = false;

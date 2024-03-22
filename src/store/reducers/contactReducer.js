@@ -43,7 +43,6 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     // get contact requests data
     builder.addCase(getContactRequestsList.pending, (state, action) => {
-      console.log("action pending:", action);
       state.isListLoading = true;
       state.isListError = false;
       state.isListSuccess = false;
@@ -73,8 +72,6 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getContactRequestsList.rejected, (state, action) => {
-      console.log("action rejected:", action);
-
       const { type, payload, error } = action;
 
       state.isListLoading = false;
@@ -85,8 +82,6 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getContactRequestsList.fulfilled, (state, action) => {
-      console.log("action fulfilled:", action);
-
       const { payload } = action;
 
       state.isListLoading = false;
@@ -98,7 +93,6 @@ const userSlice = createSlice({
 
     // get contact request
     builder.addCase(getContactRequest.pending, (state, action) => {
-      console.log("action pending:", action);
       state.isSingleLoading = true;
       state.isSingleError = false;
       state.isSingleSuccess = false;
@@ -107,8 +101,6 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getContactRequest.rejected, (state, action) => {
-      console.log("action rejected:", action);
-
       const { type, payload, error } = action;
 
       state.isSingleLoading = false;
@@ -119,8 +111,6 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getContactRequest.fulfilled, (state, action) => {
-      console.log("action fulfilled:", action);
-
       const { payload } = action;
 
       state.isSingleLoading = false;

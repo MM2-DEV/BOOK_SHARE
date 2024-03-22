@@ -7,8 +7,6 @@ const useUserList = () => {
 
   const dispatch = useDispatch();
 
-  console.log("userState:", userState);
-
   useEffect(() => {
     dispatch(getUserList());
   }, []);

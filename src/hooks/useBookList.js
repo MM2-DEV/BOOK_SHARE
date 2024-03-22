@@ -5,7 +5,6 @@ import { getBookList } from "../store/actions/book/bookActionHandler";
 const useBookList = () => {
   const bookState = useSelector((store) => store.book);
   const dispatch = useDispatch();
-  console.log("bookList:", bookState)
 
   const {isDeleteSuccess} = bookState
 
