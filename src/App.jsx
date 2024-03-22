@@ -64,7 +64,7 @@ const routes1 = createBrowserRouter([
           },
 
           {
-            path: "contact/:id",
+            path: ":id",
             element: <ContactPage />,
           },
         ],

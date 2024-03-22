@@ -105,17 +105,14 @@ const ContactList = () => {
 
                         <td className="border border-green-600 px-[20px] py-[5px]">
                           <div className="w-full flex items-center justify-between">
-                            <div>
-                              <FaRegEye size={25} color="#60a5fa" />
-                            </div>
-                            <div
+                            <button
                               onClick={() => navigate(`/contact/${item.id}`)}
                             >
                               <FaPen size={22} color="#eab308" />
-                            </div>
-                            <div onClick={() => openHandler(item.id)}>
+                            </button>
+                            <button onClick={() => openHandler(item.id)}>
                               <MdDelete size={25} color="#f43f5e" />
-                            </div>
+                            </button>
                           </div>
                         </td>
                       </tr>
