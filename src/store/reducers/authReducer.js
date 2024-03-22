@@ -17,7 +17,15 @@ const initialState = {
 const userSlice = createSlice({
   name: "authentication",
   initialState,
-  reducers: {},
+  reducers: {
+    logoutActionHandler: (state, action) => {
+      state.isCreateSignInLoading = false;
+      state.isCreateSignInError = false;
+      state.isCreateSignInSuccess = false;
+      state.createSignInError = null;
+      state.createSignInData = null;
+    },
+  },
   extraReducers: (builder) => {
     // sign up
     builder.addCase(signUp.pending, (state, action) => {
@@ -85,5 +93,7 @@ const userSlice = createSlice({
     });
   },
 });
+
+export const { logoutActionHandler } = userSlice.actions;
 
 export default userSlice.reducer;
