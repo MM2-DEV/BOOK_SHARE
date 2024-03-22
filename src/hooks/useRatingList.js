@@ -8,8 +8,6 @@ const useRatingList = () => {
 
   const dispatch = useDispatch();
 
-  console.log("ratingState:", ratingState)
-
   const {isDeleteSuccess} = ratingState
 
   useEffect(() => {

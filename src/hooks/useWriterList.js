@@ -5,9 +5,8 @@ import { getWriterList } from "../store/actions/writers/writersActionHandlers";
 const useWriterList = () => {
   const writerState = useSelector((store) => store.writers);
   const dispatch = useDispatch();
-  console.log("writerState:", writerState)
 
-  const {isDeleteSuccess} = writerState
+  const { isDeleteSuccess } = writerState;
 
   useEffect(() => {
     dispatch(getWriterList());

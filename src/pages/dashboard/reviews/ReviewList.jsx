@@ -17,7 +17,7 @@ const ReviewList = () => {
 
   const { isListLoading, listError, listData, isDeleteSuccess, isDeleteError } =
     useReviewList();
-  console.log("listdata:", listData);
+  
 
   const navigate = useNavigate();
 

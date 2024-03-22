@@ -8,8 +8,6 @@ const useContactList = () => {
 
   const dispatch = useDispatch();
 
-  console.log("contactState:", contactState);
-
   const { isDeleteSuccess } = contactState;
 
   useEffect(() => {

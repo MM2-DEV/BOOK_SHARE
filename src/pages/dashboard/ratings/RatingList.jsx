@@ -17,7 +17,7 @@ const RatingList = () => {
 
   const { isListLoading, listError, listData, isDeleteSuccess, isDeleteError } =
     useRatingList();
-  console.log("listdata:", listData);
+  
 
   const navigate = useNavigate();
 

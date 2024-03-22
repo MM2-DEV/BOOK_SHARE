@@ -43,7 +43,6 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     // get donor data
     builder.addCase(getDonorList.pending, (state, action) => {
-      console.log("action pending:", action);
       state.isListLoading = true;
       state.isListError = false;
       state.isListSuccess = false;
@@ -73,7 +72,6 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getDonorList.rejected, (state, action) => {
-      console.log("action rejected:", action);
 
       const { type, payload, error } = action;
 
@@ -85,7 +83,6 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getDonorList.fulfilled, (state, action) => {
-      console.log("action fulfilled:", action);
 
       const { payload } = action;
 
@@ -98,7 +95,6 @@ const userSlice = createSlice({
 
     // get single donor
     builder.addCase(getDonor.pending, (state, action) => {
-      console.log("action pending:", action);
       state.isSingleLoading = true;
       state.isSingleError = false;
       state.isSingleSuccess = false;
@@ -107,7 +103,6 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getDonor.rejected, (state, action) => {
-      console.log("action rejected:", action);
 
       const { type, payload, error } = action;
 
@@ -119,7 +114,6 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getDonor.fulfilled, (state, action) => {
-      console.log("action fulfilled:", action);
 
       const { payload } = action;
 

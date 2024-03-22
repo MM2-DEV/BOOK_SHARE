@@ -6,8 +6,6 @@ const useAllBook = () => {
   const allBookstate = useSelector((store) => store.allBooks);
   const dispatch = useDispatch();
 
-  console.log("allBookstate:", allBookstate);
-
   useEffect(() => {
     dispatch(getAllBookList());
   }, []);

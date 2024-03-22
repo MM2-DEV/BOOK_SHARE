@@ -13,7 +13,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { createWriterSchema } from "../../../validation/dashboard/writer";
 import { toast } from "react-toastify";
 
-
 const CreateWriter = () => {
   const params = useParams();
   const {
@@ -31,17 +30,23 @@ const CreateWriter = () => {
 
   const writerState = useWriter();
 
-  const { isCreateSuccess, isUpdateSuccess, isSingleSuccess, singleData, isCreateError ,isUpdateError} =
-    writerState;
+  const {
+    isCreateSuccess,
+    isUpdateSuccess,
+    isSingleSuccess,
+    singleData,
+    isCreateError,
+    isUpdateError,
+  } = writerState;
 
-  console.log("singleData", singleData);
+
 
   const inputChangeHandler = (data) => {
-    console.log("inputChangeHandler:");
+   
   };
 
   const submitHandler = (data) => {
-    console.log("submit handler :", data);
+   
 
     const requestBody = {
       id: uuidv4(),
@@ -49,6 +54,7 @@ const CreateWriter = () => {
       dob: data.dob,
       phone: data.phone,
       gmail: data.gmail,
+      image: data.image,
     };
 
     if (params.id) {
@@ -95,10 +101,10 @@ const CreateWriter = () => {
       setValue("dob", singleData.dob);
       setValue("phone", singleData.phone);
       setValue("gmail", singleData.gmail);
+      setValue("image", singleData.image);
     }
   }, [isSingleSuccess, singleData]);
 
-  
   return (
     <div className="w-full">
       <div className="bg-slate-100 p-3 rounded-lg">
@@ -177,7 +183,7 @@ const CreateWriter = () => {
               <label className="basis-full md:basis-1/3 p-1">Image</label>
               <div className="p-1 basis-full md:basis-3/3">
                 <input
-                  type="file"
+                  type="url"
                   name="image"
                   {...register("images")}
                   className="w-full p-2 border rounded-md focus:border-green-900 focus:outline-none placeholder:text-sm"

@@ -1,38 +1,33 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-
 export const getContactRequestsList = createAsyncThunk(
   "contact/getContactRequestsList",
   async () => {
     const url =
       "https://book-share-json-server.onrender.com/contactRequests?_expand=user";
 
-
     const res = await axios.get(url);
-    console.log("res:", res);
 
     return res.data;
   }
 );
 
-export const getContactRequest = createAsyncThunk("contact/getContactRequest", async (id) => {
+export const getContactRequest = createAsyncThunk(
+  "contact/getContactRequest",
+  async (id) => {
+    const url = `https://book-share-json-server.onrender.com/contactRequests/${id}?_expand=user`;
 
-  const url = `https://book-share-json-server.onrender.com/contactRequests/${id}?_expand=user`;
+    const res = await axios.get(url);
 
-  const res = await axios.get(url);
-  console.log("res:", res);
-
-  return res.data;
-});
+    return res.data;
+  }
+);
 
 export const createContactRequest = createAsyncThunk(
   "contact/createContactRequest",
   async (requestBody) => {
-    console.log("request body:", requestBody);
-
-    const url =
-      "https://book-share-json-server.onrender.com/contactRequests";
+    const url = "https://book-share-json-server.onrender.com/contactRequests";
 
     const res = await axios.post(url, requestBody);
 
@@ -43,9 +38,6 @@ export const createContactRequest = createAsyncThunk(
 export const updateContactRequest = createAsyncThunk(
   "contact/updateContactRequest",
   async (data) => {
-    console.log("request body:", data.requestBody);
-    console.log("id:", data.id);
-
     const url = `https://book-share-json-server.onrender.com/contactRequests/${data.id}`;
 
     const res = await axios.put(url, data.requestBody);
@@ -54,13 +46,10 @@ export const updateContactRequest = createAsyncThunk(
   }
 );
 
-
 export const deleteContactRequest = createAsyncThunk(
   "contact/deleteContactRequest",
   async (id) => {
-
     const url = `https://book-share-json-server.onrender.com/contactRequests/${id}`;
-
 
     const res = await axios.delete(url);
 

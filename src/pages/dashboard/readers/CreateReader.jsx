@@ -5,11 +5,11 @@ const CreateReader = () => {
     const { register, handleSubmit } = useForm();
 
     const inputChangeHandler = (data) => {
-      console.log("inputChangeHandler:");
+      
     };
   
     const submitHandler = (data) => {
-      console.log("submit handler :", data);
+      
     };
   
     return (

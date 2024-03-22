@@ -9,7 +9,7 @@ const ConfirmDeleteModal = ({ isOpen, closeHandler, deleteHandler }) => {
       onClose={() => closeHandler()}
     >
       <div className="fixed inset-0 flex items-center justify-center p-4 ">
-        <Dialog.Panel className="bg-white p-[40px]">
+        <Dialog.Panel className="bg-white p-[40px] rounded-lg border ">
           <Dialog.Title className="text-center">Confirm</Dialog.Title>
           <Dialog.Description className="text-center">Are you want to delete ?</Dialog.Description>
 

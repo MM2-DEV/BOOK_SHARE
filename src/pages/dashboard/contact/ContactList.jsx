@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 import { deleteContactRequest } from "../../../store/actions/contact/contactActionHandlers";
 import ConfirmDeleteModal from "../../../components/shared/ConfirmDeleteModal";
 
-
 const ContactList = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -17,8 +16,6 @@ const ContactList = () => {
 
   const { isListLoading, listError, listData, isDeleteSuccess, isDeleteError } =
     useContactList();
-
-  console.log("listdata:", listData);
 
   const navigate = useNavigate();
 
@@ -112,9 +109,7 @@ const ContactList = () => {
                               <FaRegEye size={25} color="#60a5fa" />
                             </div>
                             <div
-                              onClick={() =>
-                                navigate(`/contact/${item.id}`)
-                              }
+                              onClick={() => navigate(`/contact/${item.id}`)}
                             >
                               <FaPen size={22} color="#eab308" />
                             </div>

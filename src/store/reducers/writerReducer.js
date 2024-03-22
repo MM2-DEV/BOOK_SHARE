@@ -43,7 +43,6 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     // get writer data
     builder.addCase(getWriterList.pending, (state, action) => {
-      console.log("action pending:", action);
       state.isListLoading = true;
       state.isListError = false;
       state.isListSuccess = false;
@@ -73,7 +72,6 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getWriterList.rejected, (state, action) => {
-      console.log("action rejected:", action);
 
       const { type, payload, error } = action;
 
@@ -85,7 +83,6 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getWriterList.fulfilled, (state, action) => {
-      console.log("action fulfilled:", action);
 
       const { payload } = action;
 
@@ -98,7 +95,6 @@ const userSlice = createSlice({
 
      // get writer data
      builder.addCase(getWriter.pending, (state, action) => {
-      console.log("action pending:", action);
       state.isSingleLoading = true;
       state.isSingleError = false;
       state.isSingleSuccess = false;
@@ -107,7 +103,6 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getWriter.rejected, (state, action) => {
-      console.log("action rejected:", action);
 
       const { type, payload, error } = action;
 
@@ -119,7 +114,6 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getWriter.fulfilled, (state, action) => {
-      console.log("action fulfilled:", action);
 
       const { payload } = action;
 

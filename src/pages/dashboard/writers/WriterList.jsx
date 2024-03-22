@@ -17,7 +17,7 @@ const WriterList = () => {
   const [deleteId, setDeleteId] = useState(null)
 
   const { isListLoading, listError, listData, isDeleteSuccess, isDeleteError } = useWriterList();
-  console.log("listdata:", listData);
+
 
   const dispatch = useDispatch();
 

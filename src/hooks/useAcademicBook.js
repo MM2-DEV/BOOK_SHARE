@@ -7,9 +7,6 @@ const useAcademicBook = () => {
   const academicBookState = useSelector((store) => store.allBooks);
   const dispatch = useDispatch();
 
-  console.log("academicBookState:", academicBookState);
-
-
   useEffect(() => {
     dispatch(getAcademicBookList());
   }, []);

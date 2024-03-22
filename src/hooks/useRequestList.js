@@ -8,8 +8,6 @@ const useRequestList = () => {
 
   const dispatch = useDispatch();
 
-  console.log("requestState:", requestState)
-
   const {isDeleteSuccess} = requestState
 
   useEffect(() => {
