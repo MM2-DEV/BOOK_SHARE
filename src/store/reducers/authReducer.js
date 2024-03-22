@@ -1,9 +1,7 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createSignUp, createSignIn } from "../actions/authentication/authActionHandlers";
+import { createSlice } from "@reduxjs/toolkit";
+import { signUp, signIn } from "../actions/authentication/authActionHandlers";
 
 const initialState = {
- 
-
   isCreateSignUpLoading: false,
   isCreateSignUpError: false,
   isCreateSignUpSuccess: false,
@@ -13,8 +11,7 @@ const initialState = {
   isCreateSignInError: false,
   isCreateSignInSuccess: false,
   createSignInError: null,
-
-  
+  createSignInData: null,
 };
 
 const userSlice = createSlice({
@@ -22,55 +19,70 @@ const userSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    
-    // create sign up 
-    builder.addCase(createSignUp.pending, (state, action) => {
+    // sign up
+    builder.addCase(signUp.pending, (state, action) => {
       state.isCreateSignUpLoading = true;
       state.isCreateSignUpError = false;
       state.isCreateSignUpSuccess = false;
       state.createSignUpError = null;
     });
 
-    builder.addCase(createSignUp.rejected, (state, action) => {
+    builder.addCase(signUp.rejected, (state, action) => {
       state.isCreateSignUpLoading = false;
       state.isCreateSignUpError = true;
       state.isCreateSignUpSuccess = false;
       state.createSignUpError = action.error;
     });
 
-    builder.addCase(createSignUp.fulfilled, (state, action) => {
+    builder.addCase(signUp.fulfilled, (state, action) => {
       state.isCreateSignUpLoading = false;
       state.isCreateSignUpError = false;
       state.isCreateSignUpSuccess = true;
       state.createSignUpError = null;
     });
 
-    // create sign in 
-    builder.addCase(createSignIn.pending, (state, action) => {
-        state.isCreateSignInLoading = true;
+    // sign in
+    builder.addCase(signIn.pending, (state, action) => {
+      state.isCreateSignInLoading = true;
+      state.isCreateSignInError = false;
+      state.isCreateSignInSuccess = false;
+      state.createSignInError = null;
+      state.createSignInData = null;
+    });
+
+    builder.addCase(signIn.rejected, (state, action) => {
+      state.isCreateSignInError = true;
+      state.isCreateSignInSuccess = false;
+
+      state.createSignInError = {
+        status: "failed",
+        message: "Somethings wrong. Try again",
+        body: action.error,
+      };
+
+      state.createSignInData = null;
+      state.isCreateSignInLoading = false;
+    });
+
+    builder.addCase(signIn.fulfilled, (state, action) => {
+      if (action.payload?.length > 0) {
         state.isCreateSignInError = false;
-        state.isCreateSignInSuccess = false;
+        state.isCreateSignInSuccess = true;
+        state.createSignInData = action.payload[0];
         state.createSignInError = null;
-      });
-  
-      builder.addCase(createSignIn.rejected, (state, action) => {
-        state.isCreateSignInLoading = false;
+      } else {
         state.isCreateSignInError = true;
         state.isCreateSignInSuccess = false;
-        state.createSignInError = action.error;
-      });
-  
-      builder.addCase(createSignIn.fulfilled, (state, action) => {
-        state.isCreateSignInLoading = false;
-        state.isCreateSignInError = false;
-        state.isCreateSuccess = true;
-        state.createSignInError = null;
-      });
-  
-  
+        state.createSignInData = null;
+        state.createSignInError = {
+          status: "failed",
+          message: "No user found. Try again",
+          body: null,
+        };
+      }
 
-
-   
+      state.isCreateSignInLoading = false;
+    });
   },
 });
 

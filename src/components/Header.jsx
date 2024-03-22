@@ -2,13 +2,18 @@ import { useState } from "react";
 import React from "react";
 
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { getLocalStorageItem, removeLocalStorageItem } from "../utils/utils";
 
 const Header = () => {
+  const navigate = useNavigate();
+
   const [nav, setNav] = useState(false);
   const handleNav = () => {
     setNav(!nav);
   };
+
+  const localStorageAuthData = getLocalStorageItem("user");
 
   return (
     <div className="bg-teal-500">
@@ -34,16 +39,21 @@ const Header = () => {
               Home
             </NavLink>
           </li>
-          <li className="p-4">
-            <NavLink
-              to={"/dashboard"}
-              className={({ isActive, isPending }) =>
-                isActive ? "border-b-2" : ""
-              }
-            >
-              Dashboard
-            </NavLink>
-          </li>
+          {localStorageAuthData &&
+            (localStorageAuthData.roleId === 1 ||
+              localStorageAuthData.roleId === 2) && (
+              <li className="p-4">
+                <NavLink
+                  to={"/dashboard"}
+                  className={({ isActive, isPending }) =>
+                    isActive ? "border-b-2" : ""
+                  }
+                >
+                  Dashboard
+                </NavLink>
+              </li>
+            )}
+
           <li className="p-4">
             <NavLink
               to={"/contact"}
@@ -55,14 +65,26 @@ const Header = () => {
             </NavLink>
           </li>
           <li className="p-4">
-            <NavLink
-              to={"/sign-in"}
-              className={({ isActive, isPending }) =>
-                isActive ? "border-b-2 text-sm" : "text-sm"
-              }
-            >
-              {false ? "Logout" : "Sign-in/Sign-up"}
-            </NavLink>
+            {localStorageAuthData ? (
+              <span
+                className="text-sm cursor-pointer"
+                onClick={() => {
+                  removeLocalStorageItem("user");
+                  navigate("/sign-in");
+                }}
+              >
+                Logout
+              </span>
+            ) : (
+              <NavLink
+                to={"/sign-in"}
+                className={({ isActive, isPending }) =>
+                  isActive ? "border-b-2 text-sm" : "text-sm"
+                }
+              >
+                Sign-in/Sign-up
+              </NavLink>
+            )}
           </li>
         </ul>
 
@@ -97,26 +119,21 @@ const Header = () => {
                 Home
               </NavLink>
             </li>
-            <li className="p-4">
-              <NavLink
-                to={"/dashboard"}
-                className={({ isActive, isPending }) =>
-                  isActive ? "border-b-2" : ""
-                }
-              >
-                Dashboard
-              </NavLink>
-            </li>
-            <li className="p-4">
-              <NavLink
-                to={"/about"}
-                className={({ isActive, isPending }) =>
-                  isActive ? "border-b-2" : ""
-                }
-              >
-                About
-              </NavLink>
-            </li>
+
+            {localStorageAuthData &&
+              (localStorageAuthData.roleId === 1 ||
+                localStorageAuthData.roleId === 2) && (
+                <li className="p-4">
+                  <NavLink
+                    to={"/dashboard"}
+                    className={({ isActive, isPending }) =>
+                      isActive ? "border-b-2" : ""
+                    }
+                  >
+                    Dashboard
+                  </NavLink>
+                </li>
+              )}
             <li className="p-4">
               <NavLink
                 to={"/contact"}
@@ -128,14 +145,26 @@ const Header = () => {
               </NavLink>
             </li>
             <li className="p-4 text-xs">
-              <NavLink
-                to={"/sign-in"}
-                className={({ isActive, isPending }) =>
-                  isActive ? "border-b-2 text-sm" : "text-sm"
-                }
-              >
-                {false ? "Logout" : "Sign-in/Sign-up"}
-              </NavLink>
+              {localStorageAuthData ? (
+                <span
+                  className="text-sm cursor-pointer"
+                  onClick={() => {
+                    removeLocalStorageItem("user");
+                    navigate("/sign-in");
+                  }}
+                >
+                  Logout
+                </span>
+              ) : (
+                <NavLink
+                  to={"/sign-in"}
+                  className={({ isActive, isPending }) =>
+                    isActive ? "border-b-2 text-sm" : "text-sm"
+                  }
+                >
+                  Sign-in/Sign-up
+                </NavLink>
+              )}
             </li>
           </ul>
         </div>
