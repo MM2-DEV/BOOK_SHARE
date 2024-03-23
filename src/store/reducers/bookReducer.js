@@ -112,7 +112,6 @@ const userSlice = createSlice({
 
     builder.addCase(getBook.fulfilled, (state, action) => {
       const { payload } = action;
-      console.log("payload", payload)
 
       state.isSingleLoading = false;
       state.isSingleError = false;

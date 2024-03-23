@@ -33,7 +33,7 @@ const Header = () => {
   };
 
   return (
-    <div className="bg-teal-500">
+    <div className="bg-teal-500 sticky top-0 z-[999]">
       <div className="container flex justify-between items-center px-0 text-white">
         <div className="flex items-center">
           <img

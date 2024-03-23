@@ -29,8 +29,6 @@ const BookDetails = () => {
     singleData,
   } = bookState;
 
-  console.log("bookState", bookState);
-
   const submitHandler = () => {
     const userData = getLocalStorageItem("user");
 
