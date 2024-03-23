@@ -7,13 +7,16 @@ const useBook = () => {
   const params = useParams();
   const bookState = useSelector((store) => store.book);
 
+  const { isCreateSuccess } = useSelector((store) => store.reviews);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (params.id) {
       dispatch(getBook(params.id));
     }
-  }, []);
+  }, [isCreateSuccess]);
+
   return bookState;
 };
 

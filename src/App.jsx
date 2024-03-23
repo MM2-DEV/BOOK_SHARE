@@ -65,7 +65,7 @@ const routes1 = createBrowserRouter([
         ],
       },
       {
-        path: "/book-details",
+        path: "/book-details/:id",
         element: <BookDetails />,
       },
     ],

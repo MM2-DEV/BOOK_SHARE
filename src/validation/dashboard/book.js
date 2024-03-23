@@ -15,6 +15,8 @@ export const createBookSchema = yup.object({
     .required("Writer Name is required")
     .typeError("Writer Name is required"),
 
+  description: yup.string().required("Description is required"),
+
   isDonateOrBuy: yup.boolean(),
 
   donorId: yup.number().when("isDonateOrBuy", {

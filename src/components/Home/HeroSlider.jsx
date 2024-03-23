@@ -64,8 +64,8 @@ const HeroSlider = () => {
           disableOnInteraction: false,
         }}
         pagination={{ clickable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log("slide change")}
+        onSwiper={(swiper) => {}}
+        onSlideChange={() => {}}
         className="h-full"
         breakpoints={{
           0: {

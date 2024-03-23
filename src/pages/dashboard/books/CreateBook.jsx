@@ -82,6 +82,7 @@ const CreateBook = () => {
       edition: data.edition,
       genreId: Number(data.genreId) || "",
       writerId: Number(data.writerId) || "",
+      description: data.description,
       bookDonorId: isDonateOrBuy ? Number(data.donorId) || "" : "",
       donateDate: isDonateOrBuy ? data.donateDate || "" : "",
       price: isDonateOrBuy ? 0 : data.price,
@@ -137,6 +138,7 @@ const CreateBook = () => {
       setValue("edition", singleData.edition);
       setValue("genreId", singleData.genreId);
       setValue("writerId", singleData.writerId);
+      setValue("description", singleData.description);
       setValue("donorId", singleData.bookDonorId);
       setValue("donateDate", singleData.donateDate);
       setValue("price", singleData.price);
@@ -280,6 +282,24 @@ const CreateBook = () => {
                     : ""}
                 </select>
                 <p className=" text-red-600">{errors?.writerId?.message}</p>
+              </div>
+            </div>
+
+            <div className="flex flex-col md:flex-row">
+              <label className="basis-full md:basis-1/3 p-1 text-sm">
+                Description
+              </label>
+              <div className="p-1 basis-full md:basis-3/3">
+                <input
+                  type="text"
+                  name="description"
+                  {...register("description")}
+                  className="w-full p-2 border rounded-md focus:border-green-900 focus:outline-none placeholder:text-sm"
+                  placeholder="Enter Description"
+                  onChange={inputChangeHandler}
+                />
+
+                <p className=" text-red-600">{errors?.description?.message}</p>
               </div>
             </div>
 

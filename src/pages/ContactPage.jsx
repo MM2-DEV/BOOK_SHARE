@@ -135,7 +135,7 @@ const ContactPage = () => {
                           placeholder="Title"
                           onChange={inputChangeHandler}
                         />
-                        <p className=" text-red-600">{errors?.name?.message}</p>
+                        <p className=" text-red-600">{errors?.title?.message}</p>
                       </div>
                     </div>
 

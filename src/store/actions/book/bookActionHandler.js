@@ -10,7 +10,7 @@ export const getBookList = createAsyncThunk("book/getBookList", async () => {
 });
 
 export const getBook = createAsyncThunk("book/getBook", async (id) => {
-  const url = `https://book-share-json-server.onrender.com/books/${id}?_expand=genre&_expand=writer&_expand=bookDonor`;
+  const url = `https://book-share-json-server.onrender.com/books/${id}?_expand=genre&_expand=writer&_expand=bookDonor&_embed=reviews`;
   const res = await axios.get(url);
 
   return res.data;

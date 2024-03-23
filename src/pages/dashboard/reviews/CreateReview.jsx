@@ -14,11 +14,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { createReviewSchema } from "../../../validation/dashboard/review";
 import { toast } from "react-toastify";
 
-
 const CreateReview = () => {
   const params = useParams();
 
-  const { register, handleSubmit, setValue, formState:{errors} } = useForm({
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(createReviewSchema),
   });
 
@@ -26,20 +30,22 @@ const CreateReview = () => {
 
   const reviewState = useReview();
 
-  const { isCreateSuccess, isSingleSuccess, isUpdateSuccess, singleData, isCreateError, isUpdateError } =
-    reviewState;
+  const {
+    isCreateSuccess,
+    isSingleSuccess,
+    isUpdateSuccess,
+    singleData,
+    isCreateError,
+    isUpdateError,
+  } = reviewState;
 
   const { isListLoading, listError, listData } = useBookList();
 
   const dispatch = useDispatch();
 
-  const inputChangeHandler = (data) => {
-    
-  };
+  const inputChangeHandler = (data) => {};
 
   const submitHandler = (data) => {
-  
-
     const requestBody = {
       id: uuidv4(),
       bookId: Number(data.book),
@@ -47,6 +53,8 @@ const CreateReview = () => {
       reviewContent: data.reviewContent,
       date: data.date,
     };
+
+    console.log("requestBody",requestBody)
 
     if (params.id) {
       dispatch(updateReview({ requestBody: requestBody, id: params.id }));
@@ -114,12 +122,11 @@ const CreateReview = () => {
                   <option value="">Select</option>
                   {listData
                     ? listData.map((item, index) => {
-                        return <option value={item.id}>{item.nameEn}</option>;
+                        return <option value={item.id} key={index}>{item.nameEn}</option>;
                       })
                     : ""}
                 </select>
                 <p className=" text-red-600">{errors?.book?.message}</p>
-
               </div>
             </div>
 
@@ -135,8 +142,9 @@ const CreateReview = () => {
                   className="w-full p-2 border rounded-md focus:border-green-900 focus:outline-none placeholder:text-sm"
                   placeholder="Enter Review"
                 ></textarea>
-                <p className=" text-red-600">{errors?.reviewContent?.message}</p>
-
+                <p className=" text-red-600">
+                  {errors?.reviewContent?.message}
+                </p>
               </div>
             </div>
 
@@ -152,7 +160,6 @@ const CreateReview = () => {
                   onChange={inputChangeHandler}
                 />
                 <p className=" text-red-600">{errors?.date?.message}</p>
-
               </div>
             </div>
 
