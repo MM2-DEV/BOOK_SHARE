@@ -1,19 +1,17 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const getUserList = createAsyncThunk("user/getUserList", async () => {
-  const url = "https://reqres.in/api/users";
+export const getUserList = createAsyncThunk("users/getUserList", async () => {
+  const url = "https://book-share-json-server.onrender.com/users";
   const res = await axios.get(url);
 
   return res.data;
 });
 
 export const createUser = createAsyncThunk(
-  "user/createUser",
+  "users/createUser",
   async (inputState) => {
-    console.log("request body:", inputState);
-
-    const url = "https://reqres.in/api/users";
+    const url = "https://book-share-json-server.onrender.com/users";
 
     const res = await axios.post(url, inputState);
 
@@ -21,8 +19,8 @@ export const createUser = createAsyncThunk(
   }
 );
 
-export const deleteUser = createAsyncThunk("user/deleteUser", async (id) => {
-  const url = `https://reqres.in/api/users/${id}}`;
+export const deleteUser = createAsyncThunk("users/deleteUser", async (id) => {
+  const url = `https://book-share-json-server.onrender.com/users/${id}}`;
 
   const res = await axios.delete(url);
 

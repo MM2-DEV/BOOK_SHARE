@@ -1,12 +1,17 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserList } from "../store/actions/users/usersActionHandlers";
 
 const useUserList = () => {
-  const userList = useSelector((store) => store.users);
+  const userState = useSelector((store) => store.users);
 
-  useEffect(() => {}, {});
+  const dispatch = useDispatch();
 
-  return userList;
+  useEffect(() => {
+    dispatch(getUserList());
+  }, []);
+
+  return userState;
 };
 
 export default useUserList;
