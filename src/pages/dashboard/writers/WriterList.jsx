@@ -74,25 +74,25 @@ const WriterList = () => {
           {isListLoading && <h4>Loading...</h4>}
           {!isListLoading && listError && <h4>Error</h4>}
           {!isListLoading && !listError && listData && listData && (
-            <div className="w-full mt-[20px]">
+            <div className="w-full mt-[20px] overflow-x-auto">
               <table className="w-full border border-green-600 border-collapse">
                 <thead>
-                  <th className="border border-green-600 px-[20px] py-[5px]">
+                  <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                     User Name
                   </th>
-                  <th className="border border-green-600 px-[20px] py-[5px]">
+                  <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                     Date of Birth
                   </th>
-                  <th className="border border-green-600 px-[20px] py-[5px]">
+                  <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                     Phone
                   </th>
-                  <th className="border border-green-600 px-[20px] py-[5px]">
+                  <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                     Email
                   </th>
-                  <th className="border border-green-600 px-[20px] py-[5px]">
+                  <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                     Total Book
                   </th>
-                  <th className="border border-green-600 px-[20px] py-[5px]">
+                  <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                     Action
                   </th>
                 </thead>
@@ -116,20 +116,17 @@ const WriterList = () => {
                           {item.book.length}
                         </td>
                         <td className="border border-green-600 px-[20px] py-[5px]">
-                          <div className="w-full flex items-center justify-between">
-                            <div>
-                              <FaRegEye size={25} color="#60a5fa" />
-                            </div>
-                            <div
+                          <div className="w-full flex items-center justify-between gap-4">
+                            <button
                               onClick={() =>
                                 navigate(`/dashboard/writers/create/${item.id}`)
                               }
                             >
                               <FaPen size={22} color="#eab308" />
-                            </div>
-                            <div onClick={() => openHandler(item.id)}>
+                            </button>
+                            <button onClick={() => openHandler(item.id)}>
                               <MdDelete size={25} color="#f43f5e" />
-                            </div>
+                            </button>
                           </div>
                         </td>
                       </tr>

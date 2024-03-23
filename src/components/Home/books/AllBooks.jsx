@@ -18,7 +18,7 @@ const AllBooks = () => {
       {!isAllBookListLoading && allBookListError && (
         <h4 className="text-center text-red-500">Error</h4>
       )}
-      {!isAllBookListLoading && !allBookListError && allBookListData > 0 ? (
+      {!isAllBookListLoading && !allBookListError && allBookListData && allBookListData.length > 0 ? (
         <>
           <div className="bg-white flex flex-row flex-wrap p-2 rounded-md mt-[20px]">
             {allBookListData.map((item, index) => (
