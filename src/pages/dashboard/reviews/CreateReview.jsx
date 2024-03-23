@@ -54,8 +54,6 @@ const CreateReview = () => {
       date: data.date,
     };
 
-    console.log("requestBody",requestBody)
-
     if (params.id) {
       dispatch(updateReview({ requestBody: requestBody, id: params.id }));
     } else {
@@ -122,7 +120,11 @@ const CreateReview = () => {
                   <option value="">Select</option>
                   {listData
                     ? listData.map((item, index) => {
-                        return <option value={item.id} key={index}>{item.nameEn}</option>;
+                        return (
+                          <option value={item.id} key={index}>
+                            {item.nameEn}
+                          </option>
+                        );
                       })
                     : ""}
                 </select>

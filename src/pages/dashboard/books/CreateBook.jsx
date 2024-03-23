@@ -68,8 +68,6 @@ const CreateBook = () => {
   };
 
   const submitHandler = (data) => {
-    console.log("submit handler :", data);
-
     const requestBody = {
       id: uuidv4(),
       nameEn: data.nameEn,

@@ -12,6 +12,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Provider store={store}>
       <App />
       <ToastContainer
+        className="absolute z-[999999999]"
         position="top-right"
         autoClose={5000}
         hideProgressBar={false}

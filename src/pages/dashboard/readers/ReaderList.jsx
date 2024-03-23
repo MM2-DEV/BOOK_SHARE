@@ -20,20 +20,20 @@ const ReaderList = () => {
         {isListLoading && <h4>Loading...</h4>}
         {!isListLoading && listError && <h4>Error</h4>}
         {!isListLoading && !listError && listData && listData && (
-          <div className="w-full mt-[20px]">
+          <div className="w-full mt-[20px] overflow-x-auto">
             <table className="w-[100%] border border-green-600 border-collapse">
               <thead>
                 <tr>
-                  <th className="border border-green-600 px-[20px] py-[5px]">
+                  <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                     Book Name English
                   </th>
-                  <th className="border border-green-600 px-[20px] py-[5px]">
+                  <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                     Book Name Bengali
                   </th>
-                  <th className="border border-green-600 px-[20px] py-[5px]">
+                  <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                     User Name
                   </th>
-                  <th className="border border-green-600 px-[20px] py-[5px]">
+                  <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                     Date of Birth
                   </th>
                 </tr>

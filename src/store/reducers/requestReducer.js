@@ -5,7 +5,7 @@ import {
   getRequestList,
   getRequest,
   updateRequest
-} from "../actions/requests/requestsActionHandlers";
+} from "../actions/borrowRequest/requestsActionHandlers";
 
 const initialState = {
   isListLoading: false,
