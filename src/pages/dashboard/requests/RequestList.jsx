@@ -20,23 +20,23 @@ const RequestList = () => {
         {isListLoading && <h4>Loading...</h4>}
         {!isListLoading && listError && <h4>Error</h4>}
         {!isListLoading && !listError && listData && listData && (
-          <div className="w-full mt-[20px]">
+          <div className="w-full mt-[20px] overflow-x-auto">
             <table className="w-[100%] border border-green-600 border-collapse">
               <thead>
                 <tr>
-                  <th className="border border-green-600 px-[20px] py-[5px]">
+                  <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                     Book Name English
                   </th>
-                  <th className="border border-green-600 px-[20px] py-[5px]">
+                  <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                     Book Name Bengali
                   </th>
-                  <th className="border border-green-600 px-[20px] py-[5px]">
+                  <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                     User Name
                   </th>
-                  <th className="border border-green-600 px-[20px] py-[5px]">
+                  <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                     Date of Birth
                   </th>
-                  <th className="border border-green-600 px-[20px] py-[5px]">
+                  <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                     Action
                   </th>
                 </tr>
@@ -58,13 +58,13 @@ const RequestList = () => {
                         {item.user.dob}
                       </td>
                       <td className="border border-green-600 px-[20px] py-[5px]">
-                        <div className="w-full flex items-center justify-between">
-                          <div>
+                        <div className="w-full flex items-center justify-between gap-4">
+                          <button>
                             <FaCheck size={25} color="#60a5fa" />
-                          </div>
-                          <div>
+                          </button>
+                          <button>
                             <FaXmark size={25} color="#60a5fa" />
-                          </div>
+                          </button>
                         </div>
                       </td>
                     </tr>

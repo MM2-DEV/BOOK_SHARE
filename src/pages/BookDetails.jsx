@@ -143,7 +143,7 @@ const BookDetails = () => {
                       rows="5"
                       value={reviewContent}
                       onChange={(event) => setReviewContent(event.target.value)}
-                      className="w-full border rounded-lg mt-2 "
+                      className="w-full border rounded-lg mt-2 p-2"
                     ></textarea>
                   </div>
                   <div className="w-full pt-2 px-1 text-right">

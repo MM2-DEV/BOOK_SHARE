@@ -65,23 +65,23 @@ const ContactList = () => {
           {isListLoading && <h4>Loading...</h4>}
           {!isListLoading && listError && <h4>Error</h4>}
           {!isListLoading && !listError && listData && listData && (
-            <div className="w-full mt-[20px]">
+            <div className="w-full mt-[20px] overflow-x-auto">
               <table className="w-full border border-green-600 border-collapse">
                 <thead>
                   <tr>
-                    <th className="border border-green-600 px-[20px] py-[5px]">
+                    <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                       User Name
                     </th>
-                    <th className="border border-green-600 px-[20px] py-[5px]">
+                    <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                       Title
                     </th>
-                    <th className="border border-green-600 px-[20px] py-[5px]">
+                    <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                       Email
                     </th>
-                    <th className="border border-green-600 px-[20px] py-[5px]">
+                    <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                       Message
                     </th>
-                    <th className="border border-green-600 px-[20px] py-[5px]">
+                    <th className="border border-green-600 px-[20px] py-[5px] text-nowrap">
                       Action
                     </th>
                   </tr>
@@ -104,7 +104,7 @@ const ContactList = () => {
                         </td>
 
                         <td className="border border-green-600 px-[20px] py-[5px]">
-                          <div className="w-full flex items-center justify-between">
+                          <div className="w-full flex items-center justify-between gap-4">
                             <button
                               onClick={() => navigate(`/contact/${item.id}`)}
                             >
