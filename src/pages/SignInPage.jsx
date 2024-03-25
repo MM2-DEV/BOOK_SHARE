@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { signIn } from "../store/actions/authentication/authActionHandlers";
 import { toast } from "react-toastify";
 import { getLocalStorageItem, setLocalStorage } from "../utils/utils";
+import { resetAuthActionHandler } from "../store/reducers/authReducer";
 
 const SignInPage = () => {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const SignInPage = () => {
   });
 
   const authState = useSelector((store) => store.auth);
-  
+
   const {
     isCreateSignInLoading,
     isCreateSignInError,
@@ -37,6 +38,10 @@ const SignInPage = () => {
   const submitHandler = (data) => {
     dispatch(signIn(data));
   };
+
+  useEffect(() => {
+    dispatch(resetAuthActionHandler());
+  }, []);
 
   useEffect(() => {
     if (!isCreateSignInLoading && isCreateSignInSuccess && createSignInData) {
