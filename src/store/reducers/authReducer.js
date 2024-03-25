@@ -25,6 +25,12 @@ const userSlice = createSlice({
       state.createSignInError = null;
       state.createSignInData = null;
     },
+    resetAuthActionHandler: (state, action) => {
+      state.isCreateSignUpLoading = false;
+      state.isCreateSignUpError = false;
+      state.isCreateSignUpSuccess = false;
+      state.createSignUpError = null;
+    },
   },
   extraReducers: (builder) => {
     // sign up
@@ -94,6 +100,7 @@ const userSlice = createSlice({
   },
 });
 
-export const { logoutActionHandler } = userSlice.actions;
+export const { logoutActionHandler, resetAuthActionHandler } =
+  userSlice.actions;
 
 export default userSlice.reducer;

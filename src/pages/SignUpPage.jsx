@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { signUpSchema } from "../validation/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signUp } from "../store/actions/authentication/authActionHandlers";
 import { v4 as uuidv4 } from "uuid";
@@ -34,6 +34,9 @@ const SignUpPage = () => {
       email: data.email,
       password: data.password,
       session: data.session,
+      semester: data.semester,
+      studentId: data.studentId,
+      roleId: 1,
       dob: data.dob,
     };
 
@@ -118,6 +121,36 @@ const SignUpPage = () => {
                 <p className=" text-red-600">{errors?.session?.message}</p>
               )}
             </div>
+
+            <div className="flex flex-col gap-2 mt-4">
+              <label>Semester</label>
+              <input
+                type="text"
+                name="semester"
+                {...register("semester")}
+                className="w-full p-2 border rounded-md focus:border-green-900 focus:outline-none placeholder:text-sm bg-white"
+                placeholder="Enter Semester"
+                onChange={inputChangeHandler}
+              />
+              {errors.semester && (
+                <p className=" text-red-600">{errors?.semester?.message}</p>
+              )}
+            </div>
+
+            <div className="flex flex-col gap-2 mt-4">
+              <label>Student ID</label>
+              <input
+                type="text"
+                name="studentId"
+                {...register("studentId")}
+                className="w-full p-2 border rounded-md focus:border-green-900 focus:outline-none placeholder:text-sm bg-white"
+                placeholder="Enter Student ID"
+                onChange={inputChangeHandler}
+              />
+              {errors.studentId && (
+                <p className=" text-red-600">{errors?.studentId?.message}</p>
+              )}
+            </div>
             <div className="flex flex-col gap-2 mt-4">
               <label>Date of Birth</label>
               <input
@@ -131,6 +164,15 @@ const SignUpPage = () => {
               {errors.dob && (
                 <p className=" text-red-600">{errors?.dob?.message}</p>
               )}
+            </div>
+
+            <div className=" mt-2">
+              <span className="underline ml-2">
+                Have you already an account ?
+              </span>
+              <span className="underline ml-2">
+                <Link to="/sign-in">Sign in</Link>
+              </span>
             </div>
 
             <div className="mt-8 text-right">
